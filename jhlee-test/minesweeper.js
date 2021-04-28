@@ -30,4 +30,4 @@ function setMine(x, y, clickX, clickY){
 	}
 	return arr;
 }
-setMine(20, 20, 5, 5);
+//setMine(20, 20, 5, 5);

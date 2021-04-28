@@ -1,6 +1,10 @@
 // JavaScript Document
-function setUrlParams(params) {
+function setUrlParams(params, url) {
 	var newURL = window.location.protocol + "//" + window.location.host + "/";
+	if (Object.keys(params).length === 0){
+		window.location.href = newURL+url;
+		return;
+	}
 	var resstr = "";
 	var i = 0;
 	for(const param in params){
@@ -11,7 +15,7 @@ function setUrlParams(params) {
 		}
 		i += 1;
 	}
-	window.location.href = newURL+"jhlee-test/game.html?"+resstr;
+	window.location.href = newURL+url+"?"+resstr;
 }
 function getUrlParams() {
     var params = {};

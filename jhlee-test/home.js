@@ -4,5 +4,5 @@ function generate() {
 	var yt = document.getElementById('ysize').value;
 	var x = parseInt(xt);
 	var y = parseInt(yt);
-	setUrlParams({'x':x,'y':y});
+	setUrlParams({'x':x,'y':y},"jhlee-test/game.html");
 }
