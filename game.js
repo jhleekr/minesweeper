@@ -1,6 +1,6 @@
 // JavaScript Document
 function reset() {
-	setUrlParams({},"jhlee-test/home.html");
+	setUrlParams({},"home.html");
 }
 var x = 0;
 var y = 0;
