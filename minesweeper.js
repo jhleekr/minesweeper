@@ -1,12 +1,11 @@
 // JavaScript Document
 
 function setMine(x, y, clickX, clickY){//처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
-	var nMine=Math.max(parseInt(Math.pow(x*y, 1.25)/24), 3);
+	var nMine=Math.max(parseInt(Math.pow(x*y, 1.25)/24), 2);
 	var arr=new Array(x);
 	for(let i=0; i<x; i++){
 		arr[i]=new Array(y);
 	}
-	console.log("nMine: "+nMine);
 	for(let i=0; i<x; i++){
 		for(var j=0; j<y; j++){
 			arr[i][j]=-2;
@@ -22,11 +21,6 @@ function setMine(x, y, clickX, clickY){//처음 클릭 시에 setMine 호출한 
 		arr[newX][newY]=-1;
 	}
 	arr[clickX][clickY]=-2;
-	for(let i=0; i<x; i++){
-		for(let j=0; j<y; j++){
-			console.log(arr[i][j]);
-		}
-	}
 	processMine(x, y, clickX, clickY, arr);
 	return arr;
 }
@@ -40,13 +34,12 @@ function open(x, y, posX, posY, arr){
 	let dy=[1, 0, -1, 1, -1, 1, 0, -1];
 	let cnt=0
 	
-	arr[posX][posY]=-1;	//무한루프를 막기 위해 엉뚱한 값으로 초기화시킴
+	arr[posX][posY]=-1.5;	//무한루프를 막기 위해 엉뚱한 값으로 초기화시킴
 	
 	for(let i=0; i<8; i++){
 		let a=posX+dx[i];
 		let b=posY+dy[i];
 		if(OK(x, y, a, b)){
-			console.log(arr[a][b]);
 			if(arr[a][b]===-1){//지뢰 존재
 				cnt+=1
 			}
@@ -56,7 +49,7 @@ function open(x, y, posX, posY, arr){
 		for(let i=0; i<8; i++){
 			let a=posX+dx[i];
 			let b=posY+dy[i];
-			if(OK(x, y, a, b)){
+			if(OK(x, y, a, b)&&arr[a][b]===-2){
 				open(x, y, a, b, arr);
 			}
 		}
@@ -78,7 +71,7 @@ function processMine(x, y, clickX, clickY, arr){
 }
 
 function flagMine(x, y, clickX, clickY, arr){
-	arr[clickX][clickY]=1;
+	arr[clickX][clickY]=1-arr[clickX][clickY];
 }
 
 function setMap(x, y){
@@ -92,4 +85,14 @@ function setMap(x, y){
 		}
 	}
 	return arr;
+}
+
+function showMine(x, y, arr){
+	for(let i=0; i<x; i++){
+		for(let j=0; j<y; j++){
+			if(arr[i][j]===-1){
+				arr[i][j]=-3;
+			}
+		}
+	}
 }
