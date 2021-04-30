@@ -1,0 +1,14 @@
+/* CSS Document */
+
+.unknown_mine {
+    color: aqua
+}
+.not_mine {
+    color: aquamarine
+}
+.exploded_mine {
+    color: red
+}
+.flagged_mine {
+    color: green
+}
