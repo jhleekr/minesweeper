@@ -96,3 +96,5 @@ function showMine(x, y, arr){
 		}
 	}
 }
+
+//change
