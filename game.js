@@ -1,127 +1,172 @@
 // JavaScript Document
 function reset() {
-  setUrlParams({}, "home.html");
+    setUrlParams({}, "home.html");
 }
 var f = false;
 
 function onflag_handler() {
-  if (f) {
-    var flagbtn = document.getElementById('flag');
-    flagbtn.setAttribute('value', 'FLAG');
-    f = false;
-  } else {
-    var flagbtn = document.getElementById('flag');
-    flagbtn.setAttribute('value', 'FIND');
-    f = true;
-  }
+    if (f) {
+        var flagbtn = document.getElementById('flag');
+        flagbtn.setAttribute('value', 'FLAG');
+        f = false;
+    } else {
+        var flagbtn = document.getElementById('flag');
+        flagbtn.setAttribute('value', 'FIND');
+        f = true;
+    }
 }
 var x = 0;
 var y = 0;
 
 function init() {
-  var params = getUrlParams();
-  try {
-    x = parseInt(params['x']);
-    y = parseInt(params['y']);
-  } catch (e) {
-    alert('Error: ' + e);
-    reset();
-    return;
-  }
-  if (!(x > 2)) {
-    alert('Error: Invalid X');
-    reset();
-    return;
-  }
-  if (!(y > 2)) {
-    alert('Error: Invalid Y');
-    reset();
-    return;
-  }
-  document.writeln('<table>');
-  for (let a = 0; a < x; a++) {
-    document.writeln('<tr>');
-    for (let b = 0; b < y; b++) {
-      document.writeln('<td>');
-      document.writeln('<input id="x' + (a + 1) + 'y' + (b + 1) + '" class="unknown_mine" type="button" value=" " onclick="ms.onclick_handler(this)">');
-      document.writeln('</td>');
+    var params = getUrlParams();
+    try {
+        x = parseInt(params['x']);
+        y = parseInt(params['y']);
+    } catch (e) {
+        alert('Error: ' + e);
+        reset();
+        return;
     }
-    document.writeln('</tr>');
-  }
-  document.writeln('</table>');
-  document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
-  document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
+    if (!(x > 2)) {
+        alert('Error: Invalid X');
+        reset();
+        return;
+    }
+    if (!(y > 2)) {
+        alert('Error: Invalid Y');
+        reset();
+        return;
+    }
+    document.writeln('<table>');
+    for (let a = 0; a < x; a++) {
+        document.writeln('<tr>');
+        for (let b = 0; b < y; b++) {
+            document.writeln('<td>');
+            document.writeln('<input id="x' + (a + 1) + 'y' + (b + 1) + '" class="unknown_mine" type="button" value=" " onclick="ms.onclick_handler(this)">');
+            document.writeln('</td>');
+        }
+        document.writeln('</tr>');
+    }
+    document.writeln('</table>');
+    document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
+    document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
+    document.writeln('<p id="scoreboard"></p>');
 }
 init();
+var over = 0;
 
 function gameover() {
-  var tb = document.createElement('p');
-  tb.append('game over!');
-  document.body.appendChild(tb);
+    var tb = document.createElement('p');
+    tb.append('game over!');
+    document.body.appendChild(tb);
+    over = 1;
+}
+
+function gamedone() {
+    var tb = document.createElement('p');
+    tb.append('congratulation!');
+    document.body.appendChild(tb);
+    over = 1;
 }
 var ms = {
-  'map': [],
-  'flagmap': setMap(x, y),
-  't': 0,
-  'refreshview': function () {
-    for (let ix = 0; ix < x; ix++) {
-      for (let iy = 0; iy < y; iy++) {
-        var tmpbtn = document.getElementById('x' + (ix + 1) + 'y' + (iy + 1));
-        var mapdata = this.map[ix][iy];
-        var classstr = "";
-        var valuestr = " ";
-        //Process with tmpbtn
-        switch (mapdata) {
-          case -2: //not mine, not opened
-          case -1: //mine, not opened
-            classstr = "unknown_mine";
-            break;
-          case 0:
-          case 1:
-          case 2:
-          case 3:
-          case 4:
-          case 5:
-          case 6:
-          case 7:
-          case 8: //not mine, opened
-            classstr = "not_mine";
-            break;
-          case -3: //mine, opened
-            classstr = "exploded_mine"
+    'map': [],
+    'flagmap': setMap(x, y),
+    't': 0,
+    'rf': 0,
+    'setscore': function (sc) {
+        var element = document.getElementById("scoreboard");
+        element.innerText = "Mines left: " + sc;
+    },
+    'refreshview': function () {
+        var left = 0;
+        var realleft = 0;
+        var gm = 0;
+        for (let ix = 0; ix < x; ix++) {
+            for (let iy = 0; iy < y; iy++) {
+                var tmpbtn = document.getElementById('x' + (ix + 1) + 'y' + (iy + 1));
+                var mapdata = this.map[ix][iy];
+                var classstr = "";
+                var valuestr = " ";
+                //Process with tmpbtn
+                switch (mapdata) {
+                    case -1: //mine, not opened
+                        left += 1;
+                        realleft += 1;
+                    case -2: //not mine, not opened
+                        classstr = "unknown_mine";
+                        break;
+                    case 0:
+                    case 1:
+                    case 2:
+                    case 3:
+                    case 4:
+                    case 5:
+                    case 6:
+                    case 7:
+                    case 8: //not mine, opened
+                        classstr = "not_mine";
+                        break;
+                    case -3: //mine, opened
+                        classstr = "exploded_mine";
+                        left += 1;
+                        gm = 1;
+                        break;
+                }
+                if (classstr === "not_mine") {
+                    valuestr = mapdata + "";
+                }
+                if (classstr === "exploded_mine") {
+                    valuestr = "*";
+                }
+                if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine" && this.rf === 0) {
+                    classstr = "flagged_mine";
+                    valuestr = "f";
+                    left -= 1;
+                    if (this.map[ix][iy] === -1) {
+                        realleft -= 1;
+                    }
+                }
+                tmpbtn.setAttribute('class', classstr);
+                tmpbtn.setAttribute('value', valuestr);
+            }
+        }
+        if (this.rf === 0) { 
+            this.setscore(left);
+        }
+        if (realleft === 0 && this.rf === 0) {
+            gamedone();
+            showMine(x, y, this.map);
+            this.rf = 1;
+            this.refreshview();
+        }
+        if (gm === 1 && this.rf === 0) {
             gameover();
-            break;
+            showMine(x, y, this.map);
+            this.rf = 1;
+            this.refreshview();
         }
-        if (classstr === "not_mine") {
-          valuestr = mapdata + "";
+    },
+    'onclick_handler': function (self) {
+        if (over === 1) {
+            return;
         }
-        if (classstr === "exploded_mine") {
-          valuestr = "*";
+        var xs = parseInt(self.id.split('x')[1].split('y')[0]);
+        var ys = parseInt(self.id.split('y')[1]);
+        if (this.t === 0) {
+            this.map = setMine(x, y, xs - 1, ys - 1);
+        } else {
+            if (f) {
+                flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
+            } else {
+                if (!(this.flagmap[xs - 1][ys - 1] === 1)) {
+                    processMine(x, y, xs - 1, ys - 1, this.map); //마찬가지로 리턴값 없앰
+                }
+            }
         }
-        if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine") {
-          classstr = "flagged_mine";
-          valuestr = "f";
-        }
-        tmpbtn.setAttribute('class', classstr);
-        tmpbtn.setAttribute('value', valuestr);
-      }
+        this.refreshview();
+        this.t += 1;
     }
-  },
-  'onclick_handler': function (self) {
-    var xs = parseInt(self.id.split('x')[1].split('y')[0]);
-    var ys = parseInt(self.id.split('y')[1]);
-    if (this.t === 0) {
-      this.map = setMine(x, y, xs - 1, ys - 1);
-    } else {
-      if (f) {
-        flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
-      } else {
-        processMine(x, y, xs - 1, ys - 1, this.map); //마찬가지로 리턴값 없앰
-      }
-    }
-    this.refreshview();
-    this.t += 1;
-  }
 }
 
 //제 함수와 호환성 맞추기 위해 수정했습니다.
