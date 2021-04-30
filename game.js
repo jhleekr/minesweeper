@@ -28,12 +28,12 @@ function init() {
         reset();
         return;
     }
-    if (!(x > 2)) {
+    if (!(x > 3)) {
         alert('Error: Invalid X');
         reset();
         return;
     }
-    if (!(y > 2)) {
+    if (!(y > 3)) {
         alert('Error: Invalid Y');
         reset();
         return;
@@ -56,10 +56,25 @@ function init() {
 init();
 var over = 0;
 
+function genres() {
+    var jbBtn = document.createElement('input');
+    var a = document.createAttribute('type');
+    a.value = "button";
+    jbBtn.setAttributeNode(a);
+    var b = document.createAttribute('onclick');
+    b.value = "location.reload()";
+    jbBtn.setAttributeNode(b);
+    var c = document.createAttribute('value');
+    c.value = "RESTART";
+    jbBtn.setAttributeNode(c);
+    document.body.appendChild(jbBtn);
+}
+
 function gameover() {
     var tb = document.createElement('p');
     tb.append('game over!');
     document.body.appendChild(tb);
+    genres();
     over = 1;
 }
 
@@ -67,6 +82,7 @@ function gamedone() {
     var tb = document.createElement('p');
     tb.append('congratulation!');
     document.body.appendChild(tb);
+    genres();
     over = 1;
 }
 var ms = {
@@ -92,9 +108,11 @@ var ms = {
                 switch (mapdata) {
                     case -1: //mine, not opened
                         left += 1;
-                        realleft += 1;
+                        classstr = "unknown_mine";
+                        break;
                     case -2: //not mine, not opened
                         classstr = "unknown_mine";
+                        realleft = 1;
                         break;
                     case 0:
                     case 1:
@@ -123,15 +141,12 @@ var ms = {
                     classstr = "flagged_mine";
                     valuestr = "f";
                     left -= 1;
-                    if (this.map[ix][iy] === -1) {
-                        realleft -= 1;
-                    }
                 }
                 tmpbtn.setAttribute('class', classstr);
                 tmpbtn.setAttribute('value', valuestr);
             }
         }
-        if (this.rf === 0) { 
+        if (this.rf === 0) {
             this.setscore(left);
         }
         if (realleft === 0 && this.rf === 0) {
@@ -164,6 +179,16 @@ var ms = {
                 }
             }
         }
+        this.refreshview();
+        this.t += 1;
+    },
+    'onrclick_handler': function (self) {
+        if (over === 1) {
+            return;
+        }
+        var xs = parseInt(self.id.split('x')[1].split('y')[0]);
+        var ys = parseInt(self.id.split('y')[1]);
+        flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
         this.refreshview();
         this.t += 1;
     }
