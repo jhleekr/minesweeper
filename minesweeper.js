@@ -1,32 +1,95 @@
 // JavaScript Document
-function setMine(x, y, clickX, clickY){
-	// x와 y중 3 미만인 숫자 하나라도 있으면 오류 처리?
-	var nMine=Math.max(parseInt(Math.pow(x*y, 1.25)/24), 2);
-	window.alert(nMine);
+
+function setMine(x, y, clickX, clickY){//처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
+	var nMine=Math.max(parseInt(Math.pow(x*y, 1.25)/24), 3);
 	var arr=new Array(x);
-	for(var i=0; i<x; i++){
+	for(let i=0; i<x; i++){
 		arr[i]=new Array(y);
 	}
-	for(var i=0; i<x; i++){
+	console.log("nMine: "+nMine);
+	for(let i=0; i<x; i++){
 		for(var j=0; j<y; j++){
-			arr[i][j]=False;
+			arr[i][j]=-2;
 		}
 	}
-	arr[clickX][clickY]=true;
-	for(var i=0; i<nMine; i++){
-		var newX, newY;
+	arr[clickX][clickY]=-1;
+	for(let i=0; i<nMine; i++){
+		let newX, newY;
 		do{
-			newX=Math.random()%x;
-			newY=Math.random()%y;
-		}while(arr[newX][newY]);
-		arr[newX][newY]=true;
+			newX=parseInt(Math.random()*x)%x;
+			newY=parseInt(Math.random()*y)%y;
+		}while(arr[newX][newY]===-1);
+		arr[newX][newY]=-1;
 	}
-	arr[clickX][clickY]=false;
-	for(var i=0; i<x; i++){
-		for(var j=0; j<y; j++){
-			window.alert(arr[i][j]);
+	arr[clickX][clickY]=-2;
+	for(let i=0; i<x; i++){
+		for(let j=0; j<y; j++){
+			console.log(arr[i][j]);
+		}
+	}
+	processMine(x, y, clickX, clickY, arr);
+	return arr;
+}
+
+function OK(x, y, posX, posY){
+	return posX>=0&&posX<x&&posY>=0&&posY<y;
+}
+
+function open(x, y, posX, posY, arr){
+	let dx=[1, 1, 1, 0, 0, -1, -1, -1];
+	let dy=[1, 0, -1, 1, -1, 1, 0, -1];
+	let cnt=0
+	
+	arr[posX][posY]=-1;	//무한루프를 막기 위해 엉뚱한 값으로 초기화시킴
+	
+	for(let i=0; i<8; i++){
+		let a=posX+dx[i];
+		let b=posY+dy[i];
+		if(OK(x, y, a, b)){
+			console.log(arr[a][b]);
+			if(arr[a][b]===-1){//지뢰 존재
+				cnt+=1
+			}
+		}
+	}
+	if(cnt===0){
+		for(let i=0; i<8; i++){
+			let a=posX+dx[i];
+			let b=posY+dy[i];
+			if(OK(x, y, a, b)){
+				open(x, y, a, b, arr);
+			}
+		}
+	}
+	arr[posX][posY]=cnt;
+}
+
+function processMine(x, y, clickX, clickY, arr){
+	switch (arr[clickX][clickY]) {
+	case -2: //not mine
+		open(x, y, clickX, clickY, arr);
+		break;
+	case -1: //mine
+		arr[clickX][clickY]=-3;
+		break;
+	default:
+		break;	//이미 열린 칸 열었음
+	}
+}
+
+function flagMine(x, y, clickX, clickY, arr){
+	arr[clickX][clickY]=1;
+}
+
+function setMap(x, y){
+	let arr=new Array(x);
+	for(let i=0; i<x; i++){
+		arr[i]=new Array(y);
+	}
+	for(let i=0; i<x; i++){
+		for(let j=0; j<y; j++){
+			arr[i][j]=0;
 		}
 	}
 	return arr;
 }
-setMine(20, 20, 5, 5);

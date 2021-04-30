@@ -28,12 +28,12 @@ function init() {
     reset();
     return;
   }
-  if (!(x > 0)) {
+  if (!(x > 2)) {
     alert('Error: Invalid X');
     reset();
     return;
   }
-  if (!(y > 0)) {
+  if (!(y > 2)) {
     alert('Error: Invalid Y');
     reset();
     return;
@@ -58,7 +58,7 @@ function gameover() {
 }
 var ms = {
   'map': [],
-  'flagmap': [],
+  'flagmap': setMap(x, y),
   't': 0,
   'refreshview': function () {
     for (let ix = 0; ix < x; ix++) {
@@ -102,12 +102,14 @@ var ms = {
       this.map = setMine(x, y, xs, ys);
     } else {
 		if (f) {
-			this.flagmap = flagMine(x, y, xs, ys, flagmap);
+			flagMine(x, y, xs, ys, flagmap);	//리턴값 의미 없으므로 수정함
 		} else {
-      		this.map = processMine(x, y, xs, ys, map);
+      		processMine(x, y, xs, ys, map);		//마찬가지로 리턴값 없앰
 		}
     }
     this.refreshview();
     this.t += 1;
   }
 }
+
+//제 함수와 호환성 맞추기 위해 수정했습니다.
