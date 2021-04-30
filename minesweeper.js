@@ -5,6 +5,7 @@ function OK(x, y, posX, posY) {
 
 function setMine(x, y, clickX, clickY) { //처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
     var nMine = Math.max(parseInt(Math.pow(x * y, 1.25) / 24), 2);
+    Math.random()
     //nMine 값 랜덤으로 약간 바꾸기
     var arr = new Array(x);
     for (let i = 0; i < x; i++) {
