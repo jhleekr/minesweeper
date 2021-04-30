@@ -53,8 +53,11 @@ function init() {
   document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
 }
 init();
+
 function gameover() {
-  document.writeln('game over!');
+  var tb = document.createElement('p');
+  tb.append('game over!');
+  document.body.appendChild(tb);
 }
 var ms = {
   'map': [],
@@ -66,6 +69,7 @@ var ms = {
         var tmpbtn = document.getElementById('x' + (ix + 1) + 'y' + (iy + 1));
         var mapdata = this.map[ix][iy];
         var classstr = "";
+        var valuestr = " ";
         //Process with tmpbtn
         switch (mapdata) {
           case -2: //not mine, not opened
@@ -88,10 +92,18 @@ var ms = {
             gameover();
             break;
         }
+        if (classstr === "not_mine") {
+          valuestr = mapdata + "";
+        }
+        if (classstr === "exploded_mine") {
+          valuestr = "*";
+        }
         if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine") {
           classstr = "flagged_mine";
+          valuestr = "f";
         }
         tmpbtn.setAttribute('class', classstr);
+        tmpbtn.setAttribute('value', valuestr);
       }
     }
   },
@@ -99,13 +111,13 @@ var ms = {
     var xs = parseInt(self.id.split('x')[1].split('y')[0]);
     var ys = parseInt(self.id.split('y')[1]);
     if (this.t === 0) {
-      this.map = setMine(x, y, xs, ys);
+      this.map = setMine(x, y, xs - 1, ys - 1);
     } else {
-		if (f) {
-			flagMine(x, y, xs, ys, flagmap);	//리턴값 의미 없으므로 수정함
-		} else {
-      		processMine(x, y, xs, ys, map);		//마찬가지로 리턴값 없앰
-		}
+      if (f) {
+        flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
+      } else {
+        processMine(x, y, xs - 1, ys - 1, this.map); //마찬가지로 리턴값 없앰
+      }
     }
     this.refreshview();
     this.t += 1;
