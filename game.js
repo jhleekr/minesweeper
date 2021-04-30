@@ -62,7 +62,7 @@ var ms = {
   't': 0,
   'refreshview': function () {
     for (let ix = 0; ix < x; ix++) {
-      for (let iy = 0; iy, y; iy++) {
+      for (let iy = 0; iy < y; iy++) {
         var tmpbtn = document.getElementById('x' + (ix + 1) + 'y' + (iy + 1));
         var mapdata = this.map[ix][iy];
         var classstr = "";
