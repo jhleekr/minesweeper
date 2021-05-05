@@ -80,7 +80,7 @@ function gameover() {
 
 function gamedone() {
     var tb = document.createElement('p');
-    tb.append('congratulation!');
+    tb.append('congratulations!');
     document.body.appendChild(tb);
     genres();
     over = 1;

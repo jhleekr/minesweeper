@@ -4,9 +4,11 @@ function OK(x, y, posX, posY) {
 }
 
 function setMine(x, y, clickX, clickY) { //처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
-    var nMine = Math.max(parseInt(Math.pow(x * y, 1.25) / 24), 2);
-    Math.random()
-    //nMine 값 랜덤으로 약간 바꾸기
+    let nMine = Math.max(parseInt(Math.pow(x * y, 1.25) / 24), 2);
+    if(nMine>5){
+        let n=Math.max(parseInt(nMine/5), 1);
+        nMine+=parseInt((Math.random()-0.5)*n)%n;       //nMine 값 랜덤으로 약간 바꾸기
+    }
     var arr = new Array(x);
     for (let i = 0; i < x; i++) {
         arr[i] = new Array(y);
