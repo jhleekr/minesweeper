@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JEW 변환기</title>
+    <script>
+        function change() {
+            var value = document.getElementById('cnt').value;
+            var a = parseInt(value);
+            var flagbtn = document.getElementById('res');
+            flagbtn.set('value', a/77 + "");
+        }
+    </script>
+    <script>
+        function xchange() {
+            var value = document.getElementById('res').value;
+            var a = parseInt(value);
+            var flagbtn = document.getElementById('cnt');
+            flagbtn.setAttribute('value', a*77 + "");
+        }
+    </script>
+</head>
+
+<body>
+    <input id="cnt" type="text">
+    <input type="button" value="변환" onclick="change()">
+    <br>
+    <p>결과: (KSI Unit 기준)</p><input id="res" type="text">JEW
+    <input type="button" value="변환" onclick="xchange()">
+    <p>한번 변환하면 새로고침해야 다시쓸수있어요 귀찮아서 안고칠거임 ㅅㄱ</p>
+    <img src="jew.jpg" alt"jew">
+</body>
+</html>
