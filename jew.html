@@ -5,29 +5,22 @@
 <title>JEW 변환기</title>
     <script>
         function change() {
-            let value = document.getElementById('cnt').value;
-            let a = parseInt(value);
-            let flagbtn = document.getElementById('res');
-            flagbtn.setAttribute('value', a/77 + "");
+            document.getElementById('res1').setAttribute('value', parseFloat(document.getElementById('cnt1').value)/77 + "");
         }
-    </script>
-    <script>
         function xchange() {
-            let value = document.getElementById('res').value;
-            let a = parseInt(value);
-            let flagbtn = document.getElementById('cnt');
-            flagbtn.setAttribute('value', a*77 + "");
+            document.getElementById('res2').setAttribute('value', parseFloat(document.getElementById('cnt2').value)*77 + "");
         }
     </script>
 </head>
 
 <body>
-    <input id="cnt" type="text">
-    <input type="button" value="변환" onclick="change()">
-    <br>
-    <p>결과: (KSI Unit 기준)</p><input id="res" type="text">JEW
-    <input type="button" value="변환" onclick="xchange()">
-    <p>한번 변환하면 새로고침해야 다시쓸수있어요 귀찮아서 안고칠거임 ㅅㄱ</p>
+    <p><input id="cnt1" type="text">=<input id="res1" type="text">JEW
+    <input type="button" value="num->JEW 변환" onclick="change()"></p>
+    
+    <p><input id="cnt2" type="text">JEW=<input id="res2" type="text">
+    <input type="button" value="JEW->num 변환" onclick="xchange()"></p>
+    
+    <p>(*** KSI Unit: 정은우의 수학 성적으로부터 비롯된 KSA 대표 단위 체계)</p>
     <img src="jew.jpg" alt"jew">
 </body>
 </html>
