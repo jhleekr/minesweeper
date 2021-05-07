@@ -5,17 +5,17 @@
 <title>JEW 변환기</title>
     <script>
         function change() {
-            var value = document.getElementById('cnt').value;
-            var a = parseInt(value);
-            var flagbtn = document.getElementById('res');
+            let value = document.getElementById('cnt').value;
+            let a = parseInt(value);
+            let flagbtn = document.getElementById('res');
             flagbtn.setAttribute('value', a/77 + "");
         }
     </script>
     <script>
         function xchange() {
-            var value = document.getElementById('res').value;
-            var a = parseInt(value);
-            var flagbtn = document.getElementById('cnt');
+            let value = document.getElementById('res').value;
+            let a = parseInt(value);
+            let flagbtn = document.getElementById('cnt');
             flagbtn.setAttribute('value', a*77 + "");
         }
     </script>
