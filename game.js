@@ -25,18 +25,18 @@ function init() {
         y = parseInt(params['y']);
     } catch (e) {
         alert('Error: ' + e);
-        reset();
-        return;
+        x = 10;
+        y = 10;
     }
     if (!(x > 3)) {
         alert('Error: Invalid X');
-        reset();
-        return;
+        x = 10;
+        y = 10;
     }
     if (!(y > 3)) {
         alert('Error: Invalid Y');
-        reset();
-        return;
+        x = 10;
+        y = 10;
     }
     document.writeln('<table>');
     for (let a = 0; a < x; a++) {
@@ -139,7 +139,6 @@ var ms = {
                 }
                 if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine" && this.rf === 0) {
                     classstr = "flagged_mine";
-                    valuestr = "f";
                     left -= 1;
                 }
                 tmpbtn.setAttribute('class', classstr);

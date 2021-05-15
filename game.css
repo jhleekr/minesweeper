@@ -1,16 +1,28 @@
 /* CSS Document */
+body {
+	margin: 30px;
+}
 
 .unknown_mine {
-	
-    background-color: skyblue
+	width: 30px;
+	height: 30px;
+    background-color: powderblue;
 }
 .not_mine {
-    background-color: powderblue
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+	
 }
 .exploded_mine {
-    background-color: red
+    background-color: palevioletred;
+	width: 30px;
+	height: 30px;
 }
 .flagged_mine {
-	
-    background-color: green
+    background-color: powderblue;
+	width: 30px;
+	height: 30px;
+	background-image: url("img/flag.png");
+	background-size: cover;
 }
