@@ -38,7 +38,7 @@ function init() {
         x = 10;
         y = 10;
     }
-    document.writeln('<table>');
+    document.writeln('<table id="mstable">');
     for (let a = 0; a < x; a++) {
         document.writeln('<tr>');
         for (let b = 0; b < y; b++) {
@@ -49,9 +49,11 @@ function init() {
         document.writeln('</tr>');
     }
     document.writeln('</table>');
+    document.writeln('<div id="control">');
     document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
     document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
     document.writeln('<p id="scoreboard"></p>');
+    document.writeln('</div>');
 }
 init();
 var over = 0;
