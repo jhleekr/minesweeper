@@ -4,11 +4,10 @@ function OK(x, y, posX, posY) {
 }
 
 function setMine(x, y, clickX, clickY) { //처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
-    let nMine = Math.max(parseInt(Math.pow(x * y, 1.25) / 24), 2);
-    if(nMine>5){
-        let n=Math.max(parseInt(nMine/5), 1);
-        nMine+=parseInt((Math.random()-0.5)*n)%n;       //nMine 값 랜덤으로 약간 바꾸기
-    }
+    let nMine = Math.max(parseInt(x*y/8), 4);
+    let n=Math.max(parseInt(nMine/5), 1);
+    nMine+=parseInt((Math.random()-0.5)*n)%n;       //nMine 값 랜덤으로 약간 바꾸기
+    
     var arr = new Array(x);
     for (let i = 0; i < x; i++) {
         arr[i] = new Array(y);
@@ -44,7 +43,7 @@ function setMine(x, y, clickX, clickY) { //처음 클릭 시에 setMine 호출�
             arr[a][b]=-2;
         }
     }
-    processMine(x, y, clickX, clickY, arr);
+    processMine(x, y, clickX, clickY, arr, true);
     return arr;
 }
 
@@ -78,7 +77,7 @@ function open(x, y, posX, posY, arr) {
     arr[posX][posY] = cnt;
 }
 
-function processMine(x, y, clickX, clickY, arr, flagarr) {
+function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
     switch (arr[clickX][clickY]) {
         case -2: //not mine
             open(x, y, clickX, clickY, arr);
@@ -87,8 +86,29 @@ function processMine(x, y, clickX, clickY, arr, flagarr) {
             arr[clickX][clickY] = -3;
             break;
         default:
-            //TODO: 주변 칸 열기
-            break; //이미 열린 칸 열었음
+            if(!clicked){
+                break;
+            }
+            let dx=[1, 0, -1, 1, -1, 1, 0, -1];
+            let dy=[1, 1, 1, 0, 0, -1, -1, -1];
+            let cnt=0;
+            for (let i=0; i<8; i++){
+                let a=clickX+dx[i];
+                let b=clickY+dy[i];
+                if(OK(x, y, a, b) && flagarr[a][b]){
+                    cnt+=1;
+                }
+            }
+            if(cnt===arr[clickX][clickY]){
+                for(let i=0; i<8; i++){
+                    let a=clickX+dx[i];
+                    let b=clickY+dy[i];
+                    if(OK(x, y, a, b) && !flagarr[a][b]){
+                        processMine(x, y, a, b, arr, flagarr, false);
+                    }
+                }
+            }
+            break;
     }
 }
 
