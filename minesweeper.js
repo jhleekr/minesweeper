@@ -78,7 +78,7 @@ function open(x, y, posX, posY, arr) {
     arr[posX][posY] = cnt;
 }
 
-function processMine(x, y, clickX, clickY, arr) {
+function processMine(x, y, clickX, clickY, arr, flagarr) {
     switch (arr[clickX][clickY]) {
         case -2: //not mine
             open(x, y, clickX, clickY, arr);
@@ -87,6 +87,7 @@ function processMine(x, y, clickX, clickY, arr) {
             arr[clickX][clickY] = -3;
             break;
         default:
+            //TODO: 주변 칸 열기
             break; //이미 열린 칸 열었음
     }
 }

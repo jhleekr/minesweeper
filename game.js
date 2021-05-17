@@ -133,11 +133,8 @@ var ms = {
                         gm = 1;
                         break;
                 }
-                if (classstr === "not_mine") {
+                if (classstr === "not_mine" && mapdata != 0) {
                     valuestr = mapdata + "";
-                }
-                if (classstr === "exploded_mine") {
-                    valuestr = "*";
                 }
                 if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine" && this.rf === 0) {
                     classstr = "flagged_mine";
@@ -176,7 +173,7 @@ var ms = {
                 flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
             } else {
                 if (!(this.flagmap[xs - 1][ys - 1] === 1)) {
-                    processMine(x, y, xs - 1, ys - 1, this.map); //마찬가지로 리턴값 없앰
+                    processMine(x, y, xs - 1, ys - 1, this.map, this.flagmap); //마찬가지로 리턴값 없앰
                 }
             }
         }

@@ -11,8 +11,8 @@
 	<h1>MINESWEEPER</h1>
 	<div id="box">
 		<div id = "xy">
-			<input class="xy" id="xsize" type="text">
-			<input class="xy" id="ysize" type="text">
+			<input class="xy" id="xsize" type="text" onkeyup="if(window.event.keyCode==13){generate()}">
+			<input class="xy" id="ysize" type="text" onkeyup="if(window.event.keyCode==13){generate()}">
 		</div>
 		<div id="playButton">
 			<input id = "play" type="button" value="PLAY" onclick="generate()">
