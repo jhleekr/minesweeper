@@ -68,7 +68,7 @@ function init() {
     }
     document.writeln('</table>');
     document.writeln('<div id="control">');
-    document.writeln('<div id="controlbtn"');
+    document.writeln('<div id="controlbtn">');
     document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
     document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
     document.writeln('</div>');
