@@ -31,20 +31,30 @@ function init() {
     try {
         x = parseInt(params['x']);
         y = parseInt(params['y']);
+        d = parseInt(params['d']);
     } catch (e) {
         alert('Error: ' + e);
         x = 10;
         y = 10;
+        d = 0;
     }
     if (!(x > 3)) {
         alert('Error: Invalid X');
         x = 10;
         y = 10;
+        d = 0;
     }
     if (!(y > 3)) {
         alert('Error: Invalid Y');
         x = 10;
         y = 10;
+        d = 0;
+    }
+    if (!(0 <= d) and !(d <= 3)) {
+        alert('Error: Invalid Difficulty');
+        x = 10;
+        y = 10;
+        d = 0;
     }
     document.writeln('<table id="mstable">');
     for (let a = 0; a < x; a++) {
@@ -62,6 +72,25 @@ function init() {
     document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
     document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
     document.writeln('</div>');
+    var ds = '';
+    switch (d) {
+        case 0:
+            ds = 'easy';
+            break;
+        case 1:
+            ds = 'normal';
+            break;
+        case 2:
+            ds = 'hard';
+            break;
+        case 3:
+            ds = 'hell';
+            break;
+        default:
+            ds = 'error';
+            break;
+    }
+    document.writeln('<p id="dif">'+ds+'</p>');
     document.writeln('<p id="scoreboard"></p>');
     document.writeln('<p id="time"></p>');
     document.writeln('</div>');
@@ -207,7 +236,7 @@ for (let a = 0; a < x; a++) {
             var xs = parseInt(self.id.split('x')[1].split('y')[0]);
             var ys = parseInt(self.id.split('y')[1]);
             if (this.t === 0) {
-                this.map = setMine(x, y, xs - 1, ys - 1);
+                this.map = setMine(x, y, xs - 1, ys - 1, d);
                 this.timer = timerinit();
             } else {
                 if (f) {
