@@ -50,7 +50,7 @@ function init() {
         y = 10;
         d = 0;
     }
-    if (!(0 <= d) and !(d <= 3)) {
+    if (!(0 <= d) &&!(d <= 3)) {
         alert('Error: Invalid Difficulty');
         x = 10;
         y = 10;
