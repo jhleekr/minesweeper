@@ -67,8 +67,8 @@ function init() {
         document.writeln('</tr>');
     }
     document.writeln('</table>');
-    document.writeln('<div id="control">');
-    document.writeln('<div id="controlbtn">');
+    document.writeln('<div class="control">');
+    document.writeln('<div class="controlbtn">');
     document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
     document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
     document.writeln('</div>');
@@ -94,7 +94,11 @@ function init() {
     document.writeln('<p id="scoreboard"></p>');
     document.writeln('<p id="time"></p>');
     document.writeln('</div>');
-    document.writeln('<div id="result"></div>');
+    document.writeln('<div id="popup" class="layer">');
+    document.writeln('<div id="result" class="result"></div>');
+    document.writeln('<div class="dimmed"></div>');
+    document.writeln('</div>');
+    document.all['popup'].style.visibility = "hidden";
 }
 init();
 var time = 0;
@@ -143,6 +147,7 @@ for (let a = 0; a < x; a++) {
         tb.append('game over!');
         document.getElementById('result').appendChild(tb);
         genres();
+        document.all['popup'].style.visibility = "visible";
         over = 1;
     }
 
@@ -151,6 +156,7 @@ for (let a = 0; a < x; a++) {
         tb.append('congratulations!');
         document.getElementById('result').appendChild(tb);
         genres();
+        document.all['popup'].style.visibility = "visible";
         over = 1;
     }
     var ms = {
