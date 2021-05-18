@@ -80,12 +80,15 @@ function open(x, y, posX, posY, arr) {
 function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
     switch (arr[clickX][clickY]) {
         case -2: //not mine
+            console.log('nm');
             open(x, y, clickX, clickY, arr);
             break;
         case -1: //mine
+            console.log('m');
             arr[clickX][clickY] = -3;
             break;
         default:
+            console.log('def');
             if(!clicked){
                 break;
             }
