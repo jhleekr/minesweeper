@@ -181,7 +181,7 @@ for (let a = 0; a < x; a++) {
                     flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
                 } else {
                     if (!(this.flagmap[xs - 1][ys - 1] === 1)) {
-                        processMine(x, y, xs - 1, ys - 1, this.map, this.flagmap); //마찬가지로 리턴값 없앰
+                        processMine(x, y, xs - 1, ys - 1, this.map, this.flagmap, true); //마찬가지로 리턴값 없앰
                     }
                 }
             }
