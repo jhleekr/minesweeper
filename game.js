@@ -201,6 +201,7 @@ for (let a = 0; a < x; a++) {
                     }
                     if (classstr === "not_mine" && mapdata != 0) {
                         valuestr = mapdata + "";
+                        classstr = classstr + "_" + mapdata;
                     }
                     if (this.flagmap[ix][iy] === 1 && classstr === "unknown_mine" && this.rf === 0) {
                         classstr = "flagged_mine";

@@ -1,6 +1,5 @@
 /* CSS Document */
 body {
-	
 	margin: 30px;
 }
 #mstable {
@@ -30,7 +29,78 @@ body {
     background-color: aliceblue;
 	width: 30px;
 	height: 30px;
-	
+}
+.not_mine_1 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: blue;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_2 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: green;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_3 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: red;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_4 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: black;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_5 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: brown;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_6 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: green;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_7 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: black;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
+}
+.not_mine_8 {
+	border-radius: 1%;
+    background-color: aliceblue;
+	width: 30px;
+	height: 30px;
+    color: black;
+    font-family: 'Nanum Gothic', sans-serif;
+    font-size: larger;
 }
 .exploded_mine {
 	border-radius: 1%;
