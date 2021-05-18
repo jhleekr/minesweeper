@@ -1,4 +1,12 @@
-// JavaScript Document
+/**
+ * IDEV Project 'WEBStudy' - Minesweeper
+ * Copyright (c) 2021 김민우, 김예린, 이종현
+ * All Rights Reserved
+ *
+ * minesweeper.js
+ * minesweeper data processing core
+ */
+
 function OK(x, y, posX, posY) {
     return posX >= 0 && posX < x && posY >= 0 && posY < y;
 }
