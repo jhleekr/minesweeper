@@ -53,9 +53,22 @@ function init() {
     document.writeln('<input id="reset" class="button_general" type="button" value="RESET" onclick="reset()">');
     document.writeln('<input id="flag" class="button_general" type="button" value="FLAG" onclick="onflag_handler()">');
     document.writeln('<p id="scoreboard"></p>');
+    document.writeln('<p id="time"></p>');
     document.writeln('</div>');
 }
 init();
+var time = 0;
+var min = "";
+var sec = "";
+function timerinit() {
+    var x = setInterval(function() {
+        min = parseInt(time/60);
+        sec = time%60;
+        document.getElementById("time").innerText = min + "m " + sec + "s";
+        time++;
+    }, 1000);
+    return x;
+}
 for (let a = 0; a < x; a++) {
     for (let b = 0; b < y; b++) {
         document.getElementById('x' + (a + 1) + 'y' + (b + 1)).addEventListener("auxclick", function () {
@@ -156,12 +169,14 @@ for (let a = 0; a < x; a++) {
             }
             if (realleft === 0 && this.rf === 0) {
                 gamedone();
+                clearInterval(this.timer);
                 showMine(x, y, this.map);
                 this.rf = 1;
                 this.refreshview();
             }
             if (gm === 1 && this.rf === 0) {
                 gameover();
+                clearInterval(this.timer);
                 showMine(x, y, this.map);
                 this.rf = 1;
                 this.refreshview();
@@ -176,6 +191,7 @@ for (let a = 0; a < x; a++) {
             var ys = parseInt(self.id.split('y')[1]);
             if (this.t === 0) {
                 this.map = setMine(x, y, xs - 1, ys - 1);
+                this.timer = timerinit();
             } else {
                 if (f) {
                     flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
