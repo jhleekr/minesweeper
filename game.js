@@ -97,6 +97,12 @@ for (let a = 0; a < x; a++) {
         var c = document.createAttribute('value');
         c.value = "RESTART";
         jbBtn.setAttributeNode(c);
+        var d = document.createAttribute('id');
+        d.value = "restart";
+        jbBtn.setAttributeNode(d);
+        var e = document.createAttribute('class');
+        e.value = "button_general";
+        jbBtn.setAttributeNode(e);
         document.body.appendChild(jbBtn);
     }
 
