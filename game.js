@@ -63,6 +63,7 @@ function init() {
     document.writeln('<p id="scoreboard"></p>');
     document.writeln('<p id="time"></p>');
     document.writeln('</div>');
+    document.writeln('<div id="result"></div>');
 }
 init();
 var time = 0;
@@ -103,13 +104,13 @@ for (let a = 0; a < x; a++) {
         var e = document.createAttribute('class');
         e.value = "button_general";
         jbBtn.setAttributeNode(e);
-        document.body.appendChild(jbBtn);
+        document.getElementById('result').appendChild(jbBtn);
     }
 
     function gameover() {
         var tb = document.createElement('p');
         tb.append('game over!');
-        document.body.appendChild(tb);
+        document.getElementById('result').appendChild(tb);
         genres();
         over = 1;
     }
@@ -117,7 +118,7 @@ for (let a = 0; a < x; a++) {
     function gamedone() {
         var tb = document.createElement('p');
         tb.append('congratulations!');
-        document.body.appendChild(tb);
+        document.getElementById('result').appendChild(tb);
         genres();
         over = 1;
     }
