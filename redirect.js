@@ -1,4 +1,12 @@
-// JavaScript Document
+/**
+ * IDEV Project 'WEBStudy' - Minesweeper
+ * Copyright (c) 2021 김민우, 김예린, 이종현
+ * All Rights Reserved
+ *
+ * redirect.js
+ * functions for redirect with url parameters
+ */
+
 function setUrlParams(params, url) {
     var newURL = window.location.protocol + "//" + window.location.host + "/";
     if (Object.keys(params).length === 0) {

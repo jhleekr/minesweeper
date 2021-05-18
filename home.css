@@ -1,4 +1,12 @@
-/* CSS Document */
+/**
+ * IDEV Project 'WEBStudy' - Minesweeper
+ * Copyright (c) 2021 김민우, 김예린, 이종현
+ * All Rights Reserved
+ *
+ * home.css
+ * stylesheet for home.html
+ */
+
 @font-face {
     font-family: 'RixYeoljeongdo_Regular';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2102-01@1.0/RixYeoljeongdo_Regular.woff') format('woff');

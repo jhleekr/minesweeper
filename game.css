@@ -1,25 +1,45 @@
 /* CSS Document */
 body {
+	
 	margin: 30px;
 }
-
+#mstable {
+	display: flex;
+	justify-content: center;
+}
+#control {
+	display: flex;
+	margin: 10px;
+}
+.button_general {
+	border-radius: 1%;
+	margin: 10px;
+	width: 10%;
+	background-color: aliceblue;
+}
+#time {
+}
 .unknown_mine {
+	border-radius: 1%;
 	width: 30px;
 	height: 30px;
     background-color: powderblue;
 }
 .not_mine {
+	border-radius: 1%;
     background-color: aliceblue;
 	width: 30px;
 	height: 30px;
 	
 }
 .exploded_mine {
+	border-radius: 1%;
     background-color: palevioletred;
 	width: 30px;
 	height: 30px;
 }
 .flagged_mine {
+	border-radius: 1%;
     background-color: powderblue;
 	width: 30px;
 	height: 30px;
