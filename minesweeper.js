@@ -3,8 +3,20 @@ function OK(x, y, posX, posY) {
     return posX >= 0 && posX < x && posY >= 0 && posY < y;
 }
 
-function setMine(x, y, clickX, clickY) { //처음 클릭 시에 setMine 호출한 이후에 clicked도 호출해주세요
-    let nMine = Math.max(parseInt(x*y/8), 4);
+function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
+    let nMine = 0;
+    if(difficulty==0){
+        nMine=Math.max(parseInt(x*y/8), 4);
+    }
+    else if(difficulty==1){
+        nMine=Math.max(parseInt(x*y/6), 4);
+    }
+    else if(difficulty==2){
+        nMine = Math.max(parseInt(Math.max(parseInt((Math.pow(x*y, 1.1))/8), parseInt(x*y/5))), 4);
+    }
+    else{
+        nMine=Math.max(parseInt(x*y)/4, 4);
+    }
     let n=Math.max(parseInt(nMine/5), 1);
     nMine+=parseInt((Math.random()-0.5)*n)%n;       //nMine 값 랜덤으로 약간 바꾸기
     
