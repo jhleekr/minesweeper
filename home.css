@@ -40,8 +40,15 @@ h1 {
 }
 #play {
 	background-color: white;
-	margin: 10px;
 	height: 45px;
 	width: 30%;
+	font-size: 100%;
+	margin-top: 40px;
+}
+#difficulty {
+	position: absolute;
+	background-color: white;
+	height: 30px;
+	width: 10%;
 	font-size: 100%;
 }
