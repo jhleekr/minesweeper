@@ -11,6 +11,7 @@ function generate() {
     var xt = document.getElementById('xsize').value;
     var yt = document.getElementById('ysize').value;
     var df = document.getElementById('difficulty').value;
+    var em = document.getElementById('mode').checked;
     var d = 0;
     switch (df) {
         case 'easy':
@@ -31,9 +32,14 @@ function generate() {
     }
     var x = parseInt(xt);
     var y = parseInt(yt);
+    var e = 0;
+    if (em) {
+        e = 1;
+    }
     setUrlParams({
         'x': x,
         'y': y,
-        'd': d
+        'd': d,
+        'e': e
     }, "game.html");
 }
