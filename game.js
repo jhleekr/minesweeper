@@ -144,6 +144,9 @@ for (let a = 0; a < x; a++) {
 
     function gameover() {
         var tb = document.createElement('p');
+        var b = document.createAttribute('id');
+        b.value = "restxt";
+        tb.setAttributeNode(b);
         tb.append('game over!');
         document.getElementById('result').appendChild(tb);
         genres();
@@ -153,6 +156,9 @@ for (let a = 0; a < x; a++) {
 
     function gamedone() {
         var tb = document.createElement('p');
+        var b = document.createAttribute('id');
+        b.value = "restxt";
+        tb.setAttributeNode(b);
         tb.append('congratulations!');
         document.getElementById('result').appendChild(tb);
         genres();
