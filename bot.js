@@ -83,9 +83,6 @@ function bot_process_queue(x, y){
             let c=a+dx[i];
             let d=b+dy[i];
             if(OK(x, y, c, d)&&A[c][d]===-2){
-                //qx.push(c);
-                //qy.push(d);
-                console.log("A", a, b, c, d, A[c][d], bot_adjacent_num(x, y, -1));
                 A[c][d]=bot_adjacent_num(x, y, c, d, -1);
                 changed_during_cycle=true;
             }
@@ -96,7 +93,6 @@ function bot_process_queue(x, y){
             let c=a+dx[i];
             let d=b+dy[i];
             if(OK(x, y, c, d)&&A[c][d]===-1){
-                console.log("B", a, b, c, d, A[c][d], -3);
                 A[c][d]=-3;
                 bot_process_mine(x, y, c, d);
                 changed_during_cycle=true;
@@ -110,7 +106,6 @@ function bot_process_mine(x, y, a, b){
         let c=a+dx[i];
         let d=b+dy[i];
         if(OK(x, y, c, d)&&A[c][d]>=0){
-            console.log("C", a, b, c, d, A[c][d], A[c][d]-1);
             A[c][d]-=1;
             changed_during_cycle=true;
         }
@@ -127,8 +122,7 @@ function bot(x, y, arr){
             bot_process_queue(x, y);
         }
         bot_make_queue(x, y);
-    }while(changed_during_cycle); //while(!qx.empty());
-    
+    }while(changed_during_cycle);
     console.log(A);
     
     for(let i=0; i<x; i++){
@@ -139,6 +133,5 @@ function bot(x, y, arr){
             }
         }
     }
-    
     return true;
 }

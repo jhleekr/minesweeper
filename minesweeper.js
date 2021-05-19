@@ -7,7 +7,7 @@
  * minesweeper data processing core
  */
 
-function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
+function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
     let nMine = 0;
     if(difficulty==0){
         nMine=Math.max(parseInt(x*y/8), 4);
@@ -22,14 +22,14 @@ function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-
         nMine=Math.max(parseInt(x*y)/4, 4);
     }
     let n=Math.max(parseInt(nMine/5), 1);
-    nMine+=parseInt((Math.random()-0.5)*n)%n;       //nMine 값 랜덤으로 약간 바꾸기
+    nMine+=parseInt((Math.random()-0.5)*n)%n;
     
     var arr = new Array(x);
     for (let i = 0; i < x; i++) {
         arr[i] = new Array(y);
     }
+    let num_loop=0;
     do{
-        console.log("!!!");
         for (let i = 0; i < x; i++) {
             for (var j = 0; j < y; j++) {
                 arr[i][j] = -2;
@@ -60,22 +60,23 @@ function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-
             }
         }
         processMine(x, y, clickX, clickY, arr, arr, false);
-        console.log("Hello");
-    }while(!bot(x, y, arr));
+        num_loop+=1;
+    }while(!bot(x, y, arr)&&need_bot);
     processMine(x, y, clickX, clickY, arr, arr, true);
+    console.log("num_loop: "+num_loop);
     return arr;
 }
 
 function open(x, y, posX, posY, arr) {
     let cnt = 0
 
-    arr[posX][posY] = -1.5; //무한루프를 막기 위해 엉뚱한 값으로 초기화시킴
+    arr[posX][posY] = -1.5; //to prevent infinite loop
 
     for (let i = 0; i < 8; i++) {
         let a = posX + dx[i];
         let b = posY + dy[i];
         if (OK(x, y, a, b)) {
-            if (arr[a][b] === -1) { //지뢰 존재
+            if (arr[a][b] === -1) {
                 cnt += 1
             }
         }
