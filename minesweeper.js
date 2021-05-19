@@ -7,10 +7,6 @@
  * minesweeper data processing core
  */
 
-function OK(x, y, posX, posY) {
-    return posX >= 0 && posX < x && posY >= 0 && posY < y;
-}
-
 function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
     let nMine = 0;
     if(difficulty==0){
@@ -32,46 +28,45 @@ function setMine(x, y, clickX, clickY, difficulty) {    //difficulty: 0-easy, 1-
     for (let i = 0; i < x; i++) {
         arr[i] = new Array(y);
     }
-    for (let i = 0; i < x; i++) {
-        for (var j = 0; j < y; j++) {
-            arr[i][j] = -2;
+    do{
+        console.log("!!!");
+        for (let i = 0; i < x; i++) {
+            for (var j = 0; j < y; j++) {
+                arr[i][j] = -2;
+            }
         }
-    }
-    
-    let dx=[1, 1, 1, 0, 0, 0, -1, -1, -1];
-    let dy=[1, 0, -1, 1, 0, -1, 1, 0, -1];
-    for(let i=0; i<9; i++){
-        a=clickX+dx[i];
-        b=clickY+dy[i];
-        if(OK(x, y, a, b)){
-            arr[a][b]=-1;
+
+        for(let i=0; i<9; i++){
+            a=clickX+dx[i];
+            b=clickY+dy[i];
+            if(OK(x, y, a, b)){
+                arr[a][b]=-1;
+            }
         }
-    }
-    
-    for (let i = 0; i < nMine; i++) {
-        let newX, newY;
-        do {
-            newX = parseInt(Math.random() * x) % x;
-            newY = parseInt(Math.random() * y) % y;
-        } while (arr[newX][newY] === -1);
-        arr[newX][newY] = -1;
-    }
-    for(let i=0; i<9; i++){
-        a=clickX+dx[i];
-        b=clickY+dy[i];
-        if(OK(x, y, a, b)){
-            arr[a][b]=-2;
+
+        for (let i = 0; i < nMine; i++) {
+            let newX, newY;
+            do {
+                newX = parseInt(Math.random() * x) % x;
+                newY = parseInt(Math.random() * y) % y;
+            } while (arr[newX][newY] === -1);
+            arr[newX][newY] = -1;
         }
-    }
-    processMine(x, y, clickX, clickY, arr, true);
+        for(let i=0; i<9; i++){
+            a=clickX+dx[i];
+            b=clickY+dy[i];
+            if(OK(x, y, a, b)){
+                arr[a][b]=-2;
+            }
+        }
+        processMine(x, y, clickX, clickY, arr, arr, false);
+        console.log("Hello");
+    }while(!bot(x, y, arr));
+    processMine(x, y, clickX, clickY, arr, arr, true);
     return arr;
 }
 
-
-
 function open(x, y, posX, posY, arr) {
-    let dx = [1, 1, 1, 0, 0, -1, -1, -1];
-    let dy = [1, 0, -1, 1, -1, 1, 0, -1];
     let cnt = 0
 
     arr[posX][posY] = -1.5; //무한루프를 막기 위해 엉뚱한 값으로 초기화시킴
@@ -112,8 +107,6 @@ function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
             if(!clicked){
                 break;
             }
-            let dx=[1, 0, -1, 1, -1, 1, 0, -1];
-            let dy=[1, 1, 1, 0, 0, -1, -1, -1];
             let cnt=0;
             for (let i=0; i<8; i++){
                 let a=clickX+dx[i];
