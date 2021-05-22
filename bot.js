@@ -30,125 +30,81 @@ class Queue{
     }
 }
 
-var A;
-var visited;
-let qx=new Queue();
-let qy=new Queue();
-
-function bot_init(x, y, arr){
-    A=new Array(x);
-    visited=new Array(x);
-    for(let i=0; i<x; i++){
-        A[i]=new Array(y);
-        visited[i]=new Array(y);
-    }
-    
-    for(let i=0; i<x; i++){
-        for(let j=0; j<y; j++){
-            visited[i][j]=false;
-            A[i][j]=arr[i][j];
-        }
-    }
-}
+let A;
+let checked;
 
 function bot_adjacent_num(x, y, a, b, n){
     let result=0;
     for(let i=0; i<8; i++){
-        let c=a+dx[i];
-        let d=b+dy[i];
-        if(OK(x, y, c, d)&&A[c][d]===n){
+        if(OK(x, y, a+dx[i], b+dy[i])&&A[a+dx[i]][b+dy[i]]===n){
             result+=1;
         }
     }
     return result;
 }
 
-function bot_process_blank_mine(x, y, a, b){
-    visited[a][b]=true;
-    let mx=new Queue();
-    let my=new Queue();
-    for(let i=0; i<8; i++){
-        let c=a+dx[i];
-        let d=b+dy[i];
-        if(OK(x, y, c, d)&&A[c][d]===-1){
-            console.log("blank_mine", a, b, c, d, -3);
-            mx.push(c);
-            my.push(d);
-        }
-    }
-    while(!mx.empty()){
-        bot_process_mine(x, y, mx.front(), my.front());
-        mx.pop();
-        my.pop();
-    }
-}
-
-function bot_process_blank_blank(x, y, a, b){
-    visited[a][b]=true;
-    let mx=new Queue();
-    let my=new Queue();
-    for(let i=0; i<8; i++){
-        let c=a+dx[i];
-        let d=b+dy[i];
-        if(OK(x, y, c, d)&&A[c][d]===-2&&!visited[c][d]){
-            A[c][d]=bot_adjacent_num(x, y, c, d, -1);
-            console.log("blank_blank", a, b, c, d, bot_adjacent_num(x, y, c, d, -1));
-            mx.push(c);
-            my.push(d);
-        }
-    }
-    while(!mx.empty()){
-        if(A[mx.front()][my.front()]===0){
-            bot_process_blank_blank(x, y, mx.front(), my.front());
-        }
-        if(bot_adjacent_num(x, y, mx.front(), my.front(), -2)===0){
-            bot_process_blank_mine(x, y, mx.front(), my.front());
-        }
-        mx.pop();
-        my.pop();
-    }
-}
-
-function bot_process_blank(x, y, a, b){
-    if(A[a][b]===0){
-        bot_process_blank_blank(x, y, a, b);
-    }
-    if(bot_adjacent_num(x, y, a, d, -2)===0){
-        bot_process_blank_mine(x, y, a, b);
-    }
-}
-
-function bot_process_mine(x, y, a, b){
-    A[a][b]=-3;
-    visited[a][b]=true;
-    for(let i=0; i<8; i++){
-        let c=a+dx[i];
-        let d=b+dy[i];
-        if(OK(x, y, c, d)&&A[c][d]>0){
-            A[c][d]-=1;
-            console.log("mine", a, b, c, d, A[c][d]);
-            if(A[c][d]===0||bot_adjacent_num(x, y, c, d, -2)===0){
-                qx.push(a);
-                qy.push(b);
-            }
-        }
-    }
-}
 
 function bot(x, y, arr){
-    bot_init(x, y, arr);
+    
+    checked=new Array(x);
+    A=new Array(x);
+    for(let i=0; i<x; i++){
+        checked[i]=new Array(y);
+        A[i]=new Array(y);
+    }
+    
     for(let i=0; i<x; i++){
         for(let j=0; j<y; j++){
-            if(A[i][j]>=0&&!visited[i][j]){
-                qx.push(i);
-                qy.push(j);
+            checked[i][j]=false;
+            if(arr[i][j]===0){
+                checked[i][j]=true;
             }
+            A[i][j]=arr[i][j];
         }
     }
-    while(!qx.empty()){
-        bot_process_blank(x, y, qx.front(), qy.front());
-        qx.pop();
-        qy.pop();
+    
+    while(true){
+        var changed=false;
+        for(let i=0; i<x; i++){
+            for(let j=0; j<y; j++){
+                if(checked[i][j]){
+                    continue;
+                }
+                if(A[i][j]===0){
+                    checked[i][j]=true;
+                    for(let k=0; k<8; k++){
+                        let a=i+dx[k];
+                        let b=j+dy[k];
+                        if(OK(x, y, a, b)&&A[a][b]===-2){
+                            A[a][b]=bot_adjacent_num(x, y, a, b, -1);
+                        }
+                    }
+                    changed=true;
+                    continue;
+                }
+                if(A[i][j]>=0&&bot_adjacent_num(x, y, i, j, -2)===0){
+                    checked[i][j]=true;
+                    for(let k=0; k<8; k++){
+                        let a=i+dx[k];
+                        let b=j+dy[k];
+                        if(OK(x, y, a, b)&&A[a][b]===-1){
+                            A[a][b]=-3;
+                            for(let l=0; l<8; l++){
+                                c=a+dx[l];
+                                d=b+dy[l];
+                                if(OK(x, y, c, d)&&A[c][d]>=0){
+                                    A[c][d]-=1;
+                                }
+                            }
+                        }
+                    }
+                    changed=true;
+                }
+            }
+        }
+        if(!changed){
+            break;
+        }
     }
     
     for(let i=0; i<x; i++){
@@ -158,7 +114,7 @@ function bot(x, y, arr){
             }
         }
     }
-    
+    console.log(arr);
     console.log(A);
     
     return true;
