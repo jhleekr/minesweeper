@@ -23,14 +23,16 @@ home page
 			<input class="xy" id="ysize" type="text" onkeyup="if(window.event.keyCode==13){generate()}">
 		</div>
         
-		<div id="playButton">
+		<div id="second_floor">			
 			<select id="difficulty">
 				<option value="easy" selected>easy</option>
 				<option value="normal">normal</option>
 				<option value="hard">hard</option>
 				<option value="hell">hell</option>
 			</select>
-            <label><input id="mode" type="checkbox" name="em" value="t"> Exact Mode (무조건 깰 수 있음, 매우 높은 성능 요구)</label>
+			<label id="level"><input id="mode" type="checkbox" name="em" value="t"> Exact Mode (무조건 깰 수 있음, 매우 높은 성능 요구)</label>
+		</div>
+		<div id="third_floor">
 			<input id = "play" type="button" value="PLAY" onclick="generate()">
 		</div>
 	</div>

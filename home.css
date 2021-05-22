@@ -34,11 +34,13 @@ h1 {
 	font-size: 120%;
 	text-align: center;
 }
-#playButton{
-	display: flex;
-	justify-content: center;
+#second_floor, #third_floor{
+	width: 80%;
+	margin: 0 auto;
+	text-align: center;
 }
 #play {
+	display: inline-block;
 	background-color: white;
 	height: 45px;
 	width: 30%;
@@ -46,9 +48,11 @@ h1 {
 	margin-top: 40px;
 }
 #difficulty {
-	position: absolute;
 	background-color: white;
 	height: 30px;
 	width: 10%;
 	font-size: 100%;
+}
+#level {
+	display: inline-block;
 }
