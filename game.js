@@ -109,8 +109,10 @@ function init() {
     document.writeln('<p id="time"></p>');
     document.writeln('</div>');
     document.writeln('<div id="popup" class="layer">');
-    document.writeln('<div id="result" class="result"></div>');
     document.writeln('<div class="dimmed"></div>');
+    document.writeln('<div class="resdiv">');
+    document.writeln('<div id="result" class="result"></div>');
+    document.writeln('</div>');
     document.writeln('</div>');
     document.all['popup'].style.visibility = "hidden";
 }
