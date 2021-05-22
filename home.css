@@ -38,6 +38,7 @@ h1 {
 	width: 80%;
 	margin: 0 auto;
 	text-align: center;
+	margin-top: 20px;
 }
 #play {
 	display: inline-block;
@@ -45,7 +46,6 @@ h1 {
 	height: 45px;
 	width: 30%;
 	font-size: 100%;
-	margin-top: 40px;
 }
 #difficulty {
 	background-color: white;
