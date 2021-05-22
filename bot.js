@@ -34,8 +34,6 @@ var A;
 var visited;
 let qx=new Queue();
 let qy=new Queue();
-let mx=new Queue();
-let my=new Queue();
 
 function bot_init(x, y, arr){
     A=new Array(x);
@@ -53,17 +51,6 @@ function bot_init(x, y, arr){
     }
 }
 
-function bot_make_queue(x, y){
-    for(let i=0; i<x; i++){
-        for(let j=0; j<y; j++){
-            if(A[i][j]>=0&&!visited[i][j]){
-                qx.push(i);
-                qy.push(j);
-            }
-        }
-    }
-}
-
 function bot_adjacent_num(x, y, a, b, n){
     let result=0;
     for(let i=0; i<8; i++){
@@ -76,51 +63,73 @@ function bot_adjacent_num(x, y, a, b, n){
     return result;
 }
 
-function bot_open_mine(x, y, a, b){
-    if(A[a][b]===0){
-        bot_process_blank_blank(x, y, a, b);
-    }
-    if(bot_adjacent_num(x, y, a, b, -2)===0){
-        bot_process_blank_mine(x, y, a, b);
-    }
-}
-
 function bot_process_blank_mine(x, y, a, b){
     visited[a][b]=true;
+    let mx=new Queue();
+    let my=new Queue();
     for(let i=0; i<8; i++){
         let c=a+dx[i];
         let d=b+dy[i];
         if(OK(x, y, c, d)&&A[c][d]===-1){
-            A[c][d]=-3;
-            bot_process_mine(x, y, c, d);
+            console.log("blank_mine", a, b, c, d, -3);
+            mx.push(c);
+            my.push(d);
         }
+    }
+    while(!mx.empty()){
+        bot_process_mine(x, y, mx.front(), my.front());
+        mx.pop();
+        my.pop();
     }
 }
 
 function bot_process_blank_blank(x, y, a, b){
     visited[a][b]=true;
+    let mx=new Queue();
+    let my=new Queue();
     for(let i=0; i<8; i++){
         let c=a+dx[i];
         let d=b+dy[i];
-        if(OK(x, y, c, d)&&A[c][d]===-2){
+        if(OK(x, y, c, d)&&A[c][d]===-2&&!visited[c][d]){
             A[c][d]=bot_adjacent_num(x, y, c, d, -1);
-            bot_open_mine(x, y, c, d);
+            console.log("blank_blank", a, b, c, d, bot_adjacent_num(x, y, c, d, -1));
+            mx.push(c);
+            my.push(d);
         }
+    }
+    while(!mx.empty()){
+        if(A[mx.front()][my.front()]===0){
+            bot_process_blank_blank(x, y, mx.front(), my.front());
+        }
+        if(bot_adjacent_num(x, y, mx.front(), my.front(), -2)===0){
+            bot_process_blank_mine(x, y, mx.front(), my.front());
+        }
+        mx.pop();
+        my.pop();
+    }
+}
+
+function bot_process_blank(x, y, a, b){
+    if(A[a][b]===0){
+        bot_process_blank_blank(x, y, a, b);
+    }
+    if(bot_adjacent_num(x, y, a, d, -2)===0){
+        bot_process_blank_mine(x, y, a, b);
     }
 }
 
 function bot_process_mine(x, y, a, b){
     A[a][b]=-3;
+    visited[a][b]=true;
     for(let i=0; i<8; i++){
         let c=a+dx[i];
         let d=b+dy[i];
         if(OK(x, y, c, d)&&A[c][d]>0){
             A[c][d]-=1;
-            if(A[c][d]===0){
-                bot_process_blank_blank(x, y, c, d);
-            }
-            if(bot_adjacent_num(x, y, c, d, -2)===0){
-                bot_process_blank_mine(x, y, c, d);
+            console.log("mine", a, b, c, d, A[c][d]);
+            if(A[c][d]===0||bot_adjacent_num(x, y, c, d, -2)===0){
+                qx.push(a);
+                qy.push(b);
             }
         }
     }
@@ -128,9 +137,16 @@ function bot_process_mine(x, y, a, b){
 
 function bot(x, y, arr){
     bot_init(x, y, arr);
-    bot_make_queue(x, y);
+    for(let i=0; i<x; i++){
+        for(let j=0; j<y; j++){
+            if(A[i][j]>=0&&!visited[i][j]){
+                qx.push(i);
+                qy.push(j);
+            }
+        }
+    }
     while(!qx.empty()){
-        bot_open_mine(x, y, qx.front(), qy.front());
+        bot_process_blank(x, y, qx.front(), qy.front());
         qx.pop();
         qy.pop();
     }
