@@ -64,11 +64,27 @@ function bot(x, y, arr){
     }
     
     while(true){
-        var changed=false;
+        let changed=false;
         for(let i=0; i<x; i++){
             for(let j=0; j<y; j++){
                 if(checked[i][j]){
                     continue;
+                }
+                if(i>=1&&i<x-1&&j>=1&&j<y-1){
+                    if(A[i][j]===2&&A[i-1][j]===1&&A[i+1][j]===1){
+                        if(A[i][j-1]<0||A[i][j+1]<0){
+                            changed=true;
+                        }
+                        A[i][j-1]=bot_adjacent_num(x, y, i, j-1, -1);
+                        A[i][j+1]=bot_adjacent_num(x, y, i, j+1, -1);
+                    }
+                    if(A[i][j]===2&&A[i][j-1]===1&&A[i][j+1]===1){
+                        if(A[i-1][j]<0||A[i+1][j]<0){
+                            changed=true;
+                        }
+                        A[i-1][j]=bot_adjacent_num(x, y, i-1, j, -1);
+                        A[i+1][j]=bot_adjacent_num(x, y, i+1, j, -1);
+                    }
                 }
                 if(A[i][j]===0){
                     checked[i][j]=true;
@@ -114,8 +130,6 @@ function bot(x, y, arr){
             }
         }
     }
-    console.log(arr);
-    console.log(A);
     
     return true;
 }
