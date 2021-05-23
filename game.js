@@ -171,7 +171,7 @@ function gameover() {
     var b = document.createAttribute('id');
     b.value = "restxt";
     tb.setAttributeNode(b);
-    tb.append('game over!');
+    tb.append('GAME OVER!');
     document.getElementById('result').appendChild(tb);
     genres();
     document.all['popup'].style.visibility = "visible";
@@ -183,7 +183,7 @@ function gamedone() {
     var b = document.createAttribute('id');
     b.value = "restxt";
     tb.setAttributeNode(b);
-    tb.append('congratulations!');
+    tb.append('CONGRATULATIONS!');
     document.getElementById('result').appendChild(tb);
     genres();
     document.all['popup'].style.visibility = "visible";
@@ -271,6 +271,7 @@ var ms = {
         }
         if (shift) {
             this.onrclick_handler(self);
+            return;
         }
         console.log('onclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
