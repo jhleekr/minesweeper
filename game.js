@@ -12,6 +12,8 @@ function reset() {
     }
 var f = false;
 
+var shift = false;
+
 function onflag_handler() {
     if (f) {
         var flagbtn = document.getElementById('flag');
@@ -27,6 +29,13 @@ var x = 0;
 var y = 0;
 var d = 0;
 var e = 0;
+
+window.onkeyup=function(e){
+    if(e.keyCode==16){shift=false;}
+}
+window.onkeydown=function(e){
+    if(e.keyCode==16){shift=true;}
+}
 
 function init() {
     var params = getUrlParams();
@@ -162,7 +171,7 @@ function gameover() {
     var b = document.createAttribute('id');
     b.value = "restxt";
     tb.setAttributeNode(b);
-    tb.append('game over!');
+    tb.append('GAME OVER!');
     document.getElementById('result').appendChild(tb);
     genres();
     document.all['popup'].style.visibility = "visible";
@@ -174,7 +183,7 @@ function gamedone() {
     var b = document.createAttribute('id');
     b.value = "restxt";
     tb.setAttributeNode(b);
-    tb.append('congratulations!');
+    tb.append('CONGRATULATIONS!');
     document.getElementById('result').appendChild(tb);
     genres();
     document.all['popup'].style.visibility = "visible";
@@ -258,6 +267,10 @@ var ms = {
     },
     'onclick_handler': function (self) {
         if (over === 1) {
+            return;
+        }
+        if (shift) {
+            this.onrclick_handler(self);
             return;
         }
         console.log('onclick');
