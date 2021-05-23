@@ -12,6 +12,8 @@ function reset() {
     }
 var f = false;
 
+var shift = false;
+
 function onflag_handler() {
     if (f) {
         var flagbtn = document.getElementById('flag');
@@ -27,6 +29,13 @@ var x = 0;
 var y = 0;
 var d = 0;
 var e = 0;
+
+window.onkeyup=function(e){
+    if(e.keyCode==16){shift=false;}
+}
+window.onkeydown=function(e){
+    if(e.keyCode==16){shift=true;}
+}
 
 function init() {
     var params = getUrlParams();
@@ -109,10 +118,8 @@ function init() {
     document.writeln('<p id="time"></p>');
     document.writeln('</div>');
     document.writeln('<div id="popup" class="layer">');
-    document.writeln('<div class="dimmed"></div>');
-    document.writeln('<div class="resdiv">');
     document.writeln('<div id="result" class="result"></div>');
-    document.writeln('</div>');
+    document.writeln('<div class="dimmed"></div>');
     document.writeln('</div>');
     document.all['popup'].style.visibility = "hidden";
 }
@@ -261,6 +268,9 @@ var ms = {
     'onclick_handler': function (self) {
         if (over === 1) {
             return;
+        }
+        if (shift) {
+            this.onrclick_handler(self);
         }
         console.log('onclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
