@@ -6,30 +6,6 @@ function OK(x, y, posX, posY) {
     return posX >= 0 && posX < x && posY >= 0 && posY < y;
 }
 
-class Queue{
-    constructor(){
-        this._arr=[];
-    }
-    push(item){
-        this._arr.push(item);
-    }
-    pop(){
-        return this._arr.shift();
-    }
-    size(){
-        return this._arr.length;
-    }
-    empty(){
-        return this._arr.length===0;
-    }
-    front(){
-        return this._arr[0];
-    }
-    back(){
-        return this._arr[this.size()-1];
-    }
-}
-
 let A;
 let checked;
 
@@ -41,6 +17,17 @@ function bot_adjacent_num(x, y, a, b, n){
         }
     }
     return result;
+}
+
+function bot_put_mine(x, y, a, b){
+    A[a][b]=-3;
+    for(let i=0; i<8; i++){
+        let c=a+dx[i];
+        let d=b+dy[i];
+        if(OK(x, y, c, d)&&A[c][d]>0){
+            A[c][d]--;
+        }
+    }
 }
 
 
@@ -73,17 +60,62 @@ function bot(x, y, arr){
                 if(i>=1&&i<x-1&&j>=1&&j<y-1){
                     if(A[i][j]===2&&A[i-1][j]===1&&A[i+1][j]===1){
                         if(A[i][j-1]<0||A[i][j+1]<0){
+                            A[i][j-1]=bot_adjacent_num(x, y, i, j-1, -1);
+                            A[i][j+1]=bot_adjacent_num(x, y, i, j+1, -1);
                             changed=true;
+                            console.log("1-2-1");
                         }
-                        A[i][j-1]=bot_adjacent_num(x, y, i, j-1, -1);
-                        A[i][j+1]=bot_adjacent_num(x, y, i, j+1, -1);
+
                     }
                     if(A[i][j]===2&&A[i][j-1]===1&&A[i][j+1]===1){
                         if(A[i-1][j]<0||A[i+1][j]<0){
                             changed=true;
+                            A[i-1][j]=bot_adjacent_num(x, y, i-1, j, -1);
+                            A[i+1][j]=bot_adjacent_num(x, y, i+1, j, -1);
+                            console.log("1-2-1");
                         }
-                        A[i-1][j]=bot_adjacent_num(x, y, i-1, j, -1);
-                        A[i+1][j]=bot_adjacent_num(x, y, i+1, j, -1);
+                    }
+                }
+                if(i<x-3&&j>=1&&j<y-1){
+                    if(A[i][j]===1&&A[i+1][j]===2&&A[i+2][j]===2&&A[i+3][j]===1){
+                        console.log("1-2-2-1");
+                        if(A[i+1][j-1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+1, j-1);
+                        }
+                        if(A[i+1][j+1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+1, j+1);
+                        }
+                        if(A[i+2][j-1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+2, j-1);
+                        }
+                        if(A[i+2][j+1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+2, j+1);
+                        }
+                    }
+                }
+                if(i>=1&&i<x-1&&j<y-3){
+                    if(A[i][j]===1&&A[i][j+1]===2&&A[i][j+2]===2&&A[i][j+3]===1){
+                        console.log("1-2-2-1");
+                        if(A[i-1][j+1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i-1, j+1);
+                        }
+                        if(A[i+1][j+1]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+1, j+1);
+                        }
+                        if(A[i-1][j+2]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i-1, j+2);
+                        }
+                        if(A[i+1][j+2]===-1){
+                            changed=true;
+                            bot_put_mine(x, y, i+1, j+2);
+                        }
                     }
                 }
                 if(A[i][j]===0){
@@ -104,14 +136,7 @@ function bot(x, y, arr){
                         let a=i+dx[k];
                         let b=j+dy[k];
                         if(OK(x, y, a, b)&&A[a][b]===-1){
-                            A[a][b]=-3;
-                            for(let l=0; l<8; l++){
-                                c=a+dx[l];
-                                d=b+dy[l];
-                                if(OK(x, y, c, d)&&A[c][d]>=0){
-                                    A[c][d]-=1;
-                                }
-                            }
+                            bot_put_mine(x, y, a, b);
                         }
                     }
                     changed=true;
@@ -133,3 +158,5 @@ function bot(x, y, arr){
     
     return true;
 }
+
+//TODO: 1-1-1, 1-1-1-1
