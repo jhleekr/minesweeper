@@ -1,6 +1,6 @@
 // JavaScript Document
-let dx=[1, 1, 1, 0, 0, -1, -1, -1, 0];
-let dy=[1, 0, -1, 1, -1, 1, 0, -1, 0];
+let dx=[1, 0, -1, 0, 1, 1, -1, -1, 0];
+let dy=[0, 1, 0, -1, 1, -1, 1, -1, 0];
 
 function OK(x, y, posX, posY) {
     return posX >= 0 && posX < x && posY >= 0 && posY < y;
@@ -73,6 +73,48 @@ function bot(x, y, arr){
                             A[i-1][j]=bot_adjacent_num(x, y, i-1, j, -1);
                             A[i+1][j]=bot_adjacent_num(x, y, i+1, j, -1);
                             console.log("1-2-1");
+                        }
+                    }
+                    for(let k=0; k<4; k++){
+                        let a=i+dx[k];
+                        let b=j+dy[k];
+                        if(A[i][j]>A[a][b]&&A[a][b]>0){
+                            if(dx[k]===0){
+                                let d=j-dy[k];
+                                let cnt=0;
+                                for(let c=i-1; c<=i+1; c++){
+                                    if(OK(x, y, c, d)&&(A[c][d]===-1||A[c][d]===-2)){
+                                        cnt++;
+                                    }
+                                }
+                                if(A[a][b]+cnt===A[i][j]){
+                                    for(let c=i-1; c<=i+1; c++){
+                                        if(OK(x, y, c, d)&&A[c][d]===-1){
+                                            changed=true;
+                                            console.log(i, j, a, b, c, d);
+                                            bot_put_mine(x, y, c, d);
+                                        }
+                                    }
+                                }
+                            }
+                            else{
+                                let c=i-dx[k];
+                                let cnt=0;
+                                for(let d=j-1; d<=j+1; d++){
+                                    if(OK(x, y, c, d)&&(A[c][d]===-1||A[c][d]===-2)){
+                                        cnt++;
+                                    }
+                                }
+                                if(A[a][b]+cnt===A[i][j]){
+                                    for(let d=j-1; d<=j+1; d++){
+                                        if(OK(x, y, c, d)&&A[c][d]===-1){
+                                            changed=true;
+                                            console.log(i, j, a, b, c, d);
+                                            bot_put_mine(x, y, c, d);
+                                        }
+                                    }
+                                }
+                            }
                         }
                     }
                 }
