@@ -133,13 +133,12 @@ function bot(x, y, arr){
                                         if(A[c][d]===-2){
                                             A[c][d]=bot_adjacent_num(x, y, c, d, -1);
                                             changed=true;
-                                            console.log(c, d);
                                         }
                                     }
                                 }
                             }
                             else{
-                                if(!OK(x, y, a, i+2*dx[k])){
+                                if(!OK(x, y, i+2*dx[k], b)){
                                     continue;
                                 }
                                 let c=i-dx[k];
@@ -155,7 +154,6 @@ function bot(x, y, arr){
                                         if(A[c][d]===-2){
                                             changed=true;
                                             A[c][d]=bot_adjacent_num(x, y, c, d, -1);
-                                            console.log(c, d);
                                         }
                                     }
                                 }
@@ -230,8 +228,6 @@ function bot(x, y, arr){
         }
     }while(changed)
     
-    console.log(A);
-    
     for(let i=0; i<x; i++){
         for(let j=0; j<y; j++){
             if(A[i][j]===-1||A[i][j]===-2){
@@ -242,5 +238,3 @@ function bot(x, y, arr){
     
     return true;
 }
-
-//TODO: 1-1-1, 1-1-1-1
