@@ -1,4 +1,12 @@
-// JavaScript Document
+/**
+ * IDEV Project 'WEBStudy' - Minesweeper
+ * Copyright (c) 2021 김민우, 김예린, 이종현
+ * All Rights Reserved
+ *
+ * bot.js
+ * minesweeper auto solving bot
+ */
+
 let dx=[1, 1, 1, 0, 0, -1, -1, -1, 0];
 let dy=[1, 0, -1, 1, -1, 1, 0, -1, 0];
 
