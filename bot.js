@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /**
  * IDEV Project 'WEBStudy' - Minesweeper
  * Copyright (c) 2021 김민우, 김예린, 이종현
@@ -8,13 +7,8 @@
  * minesweeper auto solving bot
  */
 
-let dx=[1, 1, 1, 0, 0, -1, -1, -1, 0];
-let dy=[1, 0, -1, 1, -1, 1, 0, -1, 0];
-=======
-// JavaScript Document
 let dx=[1, 0, -1, 0, 1, 1, -1, -1, 0];
 let dy=[0, 1, 0, -1, 1, -1, 1, -1, 0];
->>>>>>> botexp
 
 function OK(x, y, posX, posY) {
     return posX >= 0 && posX < x && posY >= 0 && posY < y;
