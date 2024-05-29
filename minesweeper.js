@@ -112,7 +112,7 @@ function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
             for (let i = 0; i < 8; i++) {
                 let a = clickX + dx[i];
                 let b = clickY + dy[i];
-                if (OK(x, y, a, b) && flagarr[a][b]) {
+                if (OK(x, y, a, b) && flagarr[a][b] && ((arr[a][b] < 0))) {
                     cnt += 1;
                 }
             }
