@@ -9,38 +9,38 @@
 
 function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
     let nMine = 0;
-    if(difficulty==0){
-        nMine=Math.max(parseInt(x*y/8), 4);
+    if (difficulty == 0) {
+        nMine = Math.max(parseInt(x * y / 8), 4);
     }
-    else if(difficulty==1){
-        nMine=Math.max(parseInt(x*y/6), 4);
+    else if (difficulty == 1) {
+        nMine = Math.max(parseInt(x * y / 6), 4);
     }
-    else if(difficulty==2){
-        nMine = Math.max(parseInt(Math.max(parseInt((Math.pow(x*y, 1.1))/8), parseInt(x*y/5))), 4);
+    else if (difficulty == 2) {
+        nMine = Math.max(parseInt(Math.max(parseInt((Math.pow(x * y, 1.1)) / 8), parseInt(x * y / 5))), 4);
     }
-    else{
-        nMine=Math.max(parseInt(x*y)/4, 4);
+    else {
+        nMine = Math.max(parseInt(x * y) / 4, 4);
     }
-    let n=Math.max(parseInt(nMine/5), 1);
-    nMine+=parseInt((Math.random()-0.5)*n)%n;
-    
+    let n = Math.max(parseInt(nMine / 5), 1);
+    nMine += parseInt((Math.random() - 0.5) * n) % n;
+
     var arr = new Array(x);
     for (let i = 0; i < x; i++) {
         arr[i] = new Array(y);
     }
-    let num_loop=0;
-    do{
+    let num_loop = 0;
+    do {
         for (let i = 0; i < x; i++) {
             for (var j = 0; j < y; j++) {
                 arr[i][j] = -2;
             }
         }
 
-        for(let i=0; i<9; i++){
-            a=clickX+dx[i];
-            b=clickY+dy[i];
-            if(OK(x, y, a, b)){
-                arr[a][b]=-1;
+        for (let i = 0; i < 9; i++) {
+            a = clickX + dx[i];
+            b = clickY + dy[i];
+            if (OK(x, y, a, b)) {
+                arr[a][b] = -1;
             }
         }
 
@@ -52,18 +52,18 @@ function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 
             } while (arr[newX][newY] === -1);
             arr[newX][newY] = -1;
         }
-        for(let i=0; i<9; i++){
-            a=clickX+dx[i];
-            b=clickY+dy[i];
-            if(OK(x, y, a, b)){
-                arr[a][b]=-2;
+        for (let i = 0; i < 9; i++) {
+            a = clickX + dx[i];
+            b = clickY + dy[i];
+            if (OK(x, y, a, b)) {
+                arr[a][b] = -2;
             }
         }
         processMine(x, y, clickX, clickY, arr, arr, false);
-        num_loop+=1;
-    }while(!bot(x, y, arr)&&need_bot);
+        num_loop += 1;
+    } while (!bot(x, y, arr) && need_bot);
     processMine(x, y, clickX, clickY, arr, arr, true);
-    console.log("num_loop: "+num_loop);
+    console.log("num_loop: " + num_loop);
     return arr;
 }
 
@@ -105,22 +105,22 @@ function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
             break;
         default:
             console.log('def');
-            if(!clicked){
+            if (!clicked) {
                 break;
             }
-            let cnt=0;
-            for (let i=0; i<8; i++){
-                let a=clickX+dx[i];
-                let b=clickY+dy[i];
-                if(OK(x, y, a, b) && flagarr[a][b]){
-                    cnt+=1;
+            let cnt = 0;
+            for (let i = 0; i < 8; i++) {
+                let a = clickX + dx[i];
+                let b = clickY + dy[i];
+                if (OK(x, y, a, b) && flagarr[a][b]) {
+                    cnt += 1;
                 }
             }
-            if(cnt===arr[clickX][clickY]){
-                for(let i=0; i<8; i++){
-                    let a=clickX+dx[i];
-                    let b=clickY+dy[i];
-                    if(OK(x, y, a, b) && !flagarr[a][b]){
+            if (cnt === arr[clickX][clickY]) {
+                for (let i = 0; i < 8; i++) {
+                    let a = clickX + dx[i];
+                    let b = clickY + dy[i];
+                    if (OK(x, y, a, b) && !flagarr[a][b]) {
                         processMine(x, y, a, b, arr, flagarr, false);
                     }
                 }

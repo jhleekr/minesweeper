@@ -8,36 +8,37 @@ home.html
 home page
 -->
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>Minesweeper - Home</title>
-<link rel="stylesheet" href="home.css">
+	<meta charset="utf-8">
+	<title>Minesweeper - Home</title>
+	<link rel="stylesheet" href="home.css">
 </head>
 <script src="redirect.js"></script>
 <script src="home.js"></script>
+
 <body>
 	<h1>MINESWEEPER</h1>
 	<div id="box">
-		<div id = "xy">
+		<div id="xy">
 			<input class="xy" id="xsize" type="text" onkeyup="if(window.event.keyCode==13){generate()}">
 			<input class="xy" id="ysize" type="text" onkeyup="if(window.event.keyCode==13){generate()}">
 		</div>
-        
-		<div id="second_floor">			
+
+		<div id="second_floor">
 			<select id="difficulty">
 				<option value="easy" selected>easy</option>
 				<option value="normal">normal</option>
 				<option value="hard">hard</option>
 				<option value="hell">hell</option>
 			</select>
-			<label id="level"><input id="mode" type="checkbox" name="em" value="t"> Exact Mode (무조건 깰 수 있음, 매우 높은 성능 요구)</label>
+			<label id="level"><input id="mode" type="checkbox" name="em" value="t"> Exact Mode (무조건 깰 수 있음, 매우 높은 성능
+				요구)</label>
 		</div>
 		<div id="third_floor">
-			<input id = "play" type="button" value="PLAY" onclick="generate()">
+			<input id="play" type="button" value="PLAY" onclick="generate()">
 		</div>
 	</div>
 </body>
+
 </html>
-
-
-

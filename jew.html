@@ -1,26 +1,30 @@
 <!doctype html>
 <html>
+
 <head>
-<meta charset="utf-8">
-<title>JEW 변환기</title>
+    <meta charset="utf-8">
+    <title>JEW 변환기</title>
     <script>
         function change() {
-            document.getElementById('res1').setAttribute('value', parseFloat(document.getElementById('cnt1').value)/77 + "");
+            document.getElementById('res1').setAttribute('value', parseFloat(document.getElementById('cnt1').value) / 77 + "");
         }
         function xchange() {
-            document.getElementById('res2').setAttribute('value', parseFloat(document.getElementById('cnt2').value)*77 + "");
+            document.getElementById('res2').setAttribute('value', parseFloat(document.getElementById('cnt2').value) * 77 + "");
         }
     </script>
 </head>
 
 <body>
     <p><input id="cnt1" type="text">=<input id="res1" type="text">JEW
-    <input type="button" value="num->JEW 변환" onclick="change()"></p>
-    
+        <input type="button" value="num->JEW 변환" onclick="change()">
+    </p>
+
     <p><input id="cnt2" type="text">JEW=<input id="res2" type="text">
-    <input type="button" value="JEW->num 변환" onclick="xchange()"></p>
-    
+        <input type="button" value="JEW->num 변환" onclick="xchange()">
+    </p>
+
     <p>(*** KSI Unit: 정은우의 수학 성적으로부터 비롯된 KSA 대표 단위 체계)</p>
     <img src="jew.jpg" alt="jew">
 </body>
+
 </html>
