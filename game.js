@@ -124,7 +124,7 @@ function init() {
     document.writeln('<div id="result" class="result"></div>');
     document.writeln('<div class="dimmed"></div>');
     document.writeln('</div>');
-    document.all['popup'].style.visibility = "hidden";
+    document.getElementById("popup").style.visibility = "hidden";
 }
 init();
 var time = 0;
@@ -177,7 +177,7 @@ function gameover() {
     tb.append('GAME OVER!');
     document.getElementById('result').appendChild(tb);
     genres();
-    document.all['popup'].style.visibility = "visible";
+    document.getElementById("popup").style.visibility = "visible";
     over = 1;
 }
 
@@ -189,7 +189,7 @@ function gamedone() {
     tb.append('CONGRATULATIONS!');
     document.getElementById('result').appendChild(tb);
     genres();
-    document.all['popup'].style.visibility = "visible";
+    document.getElementById("popup").style.visibility = "visible";
     over = 1;
 }
 var ms = {
@@ -308,5 +308,3 @@ var ms = {
         this.refreshview();
     }
 }
-
-//제 함수와 호환성 맞추기 위해 수정했습니다.
