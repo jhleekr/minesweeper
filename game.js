@@ -276,7 +276,6 @@ var ms = {
             this.onrclick_handler(self);
             return;
         }
-        console.log('onclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
         var ys = parseInt(self.id.split('y')[1]);
         if (this.t === 0) {
@@ -301,7 +300,6 @@ var ms = {
         if (this.t != 1) {
             return;
         }
-        console.log('onrclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
         var ys = parseInt(self.id.split('y')[1]);
         flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
