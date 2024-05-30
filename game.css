@@ -8,6 +8,8 @@
  */
 
 body {
+	background-color: #DCE2F0;
+	color: #50586C;
     margin: 30px;
 }
 
@@ -48,7 +50,7 @@ body {
 
 .button_general {
     border-radius: 1%;
-    background-color: white;
+    background-color: #DCE2F0;
     margin: 10px;
     font-size: 20px;
     font-family: 'Nanum Gothic', sans-serif;
@@ -68,19 +70,19 @@ body {
     border-radius: 1%;
     width: 30px;
     height: 30px;
-    background-color: powderblue;
+    background-color: #50586C;
 }
 
 .not_mine {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
 }
 
 .not_mine_1 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: blue;
@@ -90,7 +92,7 @@ body {
 
 .not_mine_2 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: green;
@@ -100,7 +102,7 @@ body {
 
 .not_mine_3 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: red;
@@ -110,7 +112,7 @@ body {
 
 .not_mine_4 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: black;
@@ -120,7 +122,7 @@ body {
 
 .not_mine_5 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: brown;
@@ -130,7 +132,7 @@ body {
 
 .not_mine_6 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: green;
@@ -140,7 +142,7 @@ body {
 
 .not_mine_7 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: black;
@@ -150,7 +152,7 @@ body {
 
 .not_mine_8 {
     border-radius: 1%;
-    background-color: aliceblue;
+    background-color:#DCE2F0;
     width: 30px;
     height: 30px;
     color: black;
@@ -163,11 +165,13 @@ body {
     background-color: palevioletred;
     width: 30px;
     height: 30px;
+    background-image: url("img/mine.png");
+    background-size: cover;
 }
 
 .flagged_mine {
     border-radius: 1%;
-    background-color: powderblue;
+    background-color: #50586C;
     width: 30px;
     height: 30px;
     background-image: url("img/flag.png");
