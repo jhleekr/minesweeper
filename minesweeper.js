@@ -63,7 +63,6 @@ function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 
         num_loop += 1;
     } while (!bot(x, y, arr) && need_bot);
     processMine(x, y, clickX, clickY, arr, arr, true);
-    console.log("num_loop: " + num_loop);
     return arr;
 }
 
@@ -96,15 +95,12 @@ function open(x, y, posX, posY, arr) {
 function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
     switch (arr[clickX][clickY]) {
         case -2: //not mine
-            console.log('nm');
             open(x, y, clickX, clickY, arr);
             break;
         case -1: //mine
-            console.log('m');
             arr[clickX][clickY] = -3;
             break;
         default:
-            console.log('def');
             if (!clicked) {
                 break;
             }
@@ -112,7 +108,7 @@ function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
             for (let i = 0; i < 8; i++) {
                 let a = clickX + dx[i];
                 let b = clickY + dy[i];
-                if (OK(x, y, a, b) && flagarr[a][b]) {
+                if (OK(x, y, a, b) && flagarr[a][b] && ((arr[a][b] < 0))) {
                     cnt += 1;
                 }
             }

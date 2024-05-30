@@ -276,7 +276,6 @@ var ms = {
             this.onrclick_handler(self);
             return;
         }
-        console.log('onclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
         var ys = parseInt(self.id.split('y')[1]);
         if (this.t === 0) {
@@ -286,7 +285,7 @@ var ms = {
             if (f) {
                 flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
             } else {
-                if (!(this.flagmap[xs - 1][ys - 1] === 1)) {
+                if (!(this.flagmap[xs - 1][ys - 1] === 1) || (this.map[xs - 1][ys - 1] >= 0)) {
                     processMine(x, y, xs - 1, ys - 1, this.map, this.flagmap, true); //마찬가지로 리턴값 없앰
                 }
             }
@@ -301,7 +300,6 @@ var ms = {
         if (this.t != 1) {
             return;
         }
-        console.log('onrclick');
         var xs = parseInt(self.id.split('x')[1].split('y')[0]);
         var ys = parseInt(self.id.split('y')[1]);
         flagMine(x, y, xs - 1, ys - 1, this.flagmap); //리턴값 의미 없으므로 수정함
