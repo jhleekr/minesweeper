@@ -39,7 +39,6 @@ function bot_put_mine(x, y, a, b) {
 }
 
 function bot(x, y, arr) {
-
     checked = new Array(x);
     A = new Array(x);
     for (let i = 0; i < x; i++) {
@@ -66,14 +65,24 @@ function bot(x, y, arr) {
                     continue;
                 }
                 if (i >= 1 && i < x - 1 && j >= 1 && j < y - 1) {
-                    if (A[i][j] === 2 && A[i - 1][j] === 1 && A[i + 1][j] === 1) {//vertical 1-2-1
+                    if (
+                        A[i][j] === 2 &&
+                        A[i - 1][j] === 1 &&
+                        A[i + 1][j] === 1
+                    ) {
+                        //vertical 1-2-1
                         if (A[i][j - 1] < 0 || A[i][j + 1] < 0) {
                             changed = true;
                             A[i][j - 1] = bot_adjacent_num(x, y, i, j - 1, -1);
                             A[i][j + 1] = bot_adjacent_num(x, y, i, j + 1, -1);
                         }
                     }
-                    if (A[i][j] === 2 && A[i][j - 1] === 1 && A[i][j + 1] === 1) {//horizontal 1-2-1
+                    if (
+                        A[i][j] === 2 &&
+                        A[i][j - 1] === 1 &&
+                        A[i][j + 1] === 1
+                    ) {
+                        //horizontal 1-2-1
                         if (A[i - 1][j] < 0 || A[i + 1][j] < 0) {
                             changed = true;
                             A[i - 1][j] = bot_adjacent_num(x, y, i - 1, j, -1);
@@ -88,7 +97,10 @@ function bot(x, y, arr) {
                                 let d = j - dy[k];
                                 let cnt = 0;
                                 for (let c = i - 1; c <= i + 1; c++) {
-                                    if (OK(x, y, c, d) && (A[c][d] === -1 || A[c][d] === -2)) {
+                                    if (
+                                        OK(x, y, c, d) &&
+                                        (A[c][d] === -1 || A[c][d] === -2)
+                                    ) {
                                         cnt++;
                                     }
                                 }
@@ -100,8 +112,7 @@ function bot(x, y, arr) {
                                         }
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 let c = i - dx[k];
                                 let cnt = 0;
                                 for (let d = j - 1; d <= j + 1; d++) {
@@ -131,7 +142,10 @@ function bot(x, y, arr) {
                                 let d = j - dy[k];
                                 let cnt = 0;
                                 for (let c = i - 1; c <= i + 1; c++) {
-                                    if (OK(x, y, c, d) && (A[c][d] === -1 || A[c][d] === -2)) {
+                                    if (
+                                        OK(x, y, c, d) &&
+                                        (A[c][d] === -1 || A[c][d] === -2)
+                                    ) {
                                         cnt++;
                                     }
                                 }
@@ -139,13 +153,18 @@ function bot(x, y, arr) {
                                     d = j + 2 * dy[k];
                                     for (let c = i - 1; c <= i + 1; c++) {
                                         if (A[c][d] === -2) {
-                                            A[c][d] = bot_adjacent_num(x, y, c, d, -1);
+                                            A[c][d] = bot_adjacent_num(
+                                                x,
+                                                y,
+                                                c,
+                                                d,
+                                                -1
+                                            );
                                             changed = true;
                                         }
                                     }
                                 }
-                            }
-                            else {
+                            } else {
                                 if (!OK(x, y, i + 2 * dx[k], b)) {
                                     continue;
                                 }
@@ -161,7 +180,13 @@ function bot(x, y, arr) {
                                     for (let d = j - 1; d <= j + 1; d++) {
                                         if (A[c][d] === -2) {
                                             changed = true;
-                                            A[c][d] = bot_adjacent_num(x, y, c, d, -1);
+                                            A[c][d] = bot_adjacent_num(
+                                                x,
+                                                y,
+                                                c,
+                                                d,
+                                                -1
+                                            );
                                         }
                                     }
                                 }
@@ -170,7 +195,13 @@ function bot(x, y, arr) {
                     }
                 }
                 if (i < x - 3 && j >= 1 && j < y - 1) {
-                    if (A[i][j] === 1 && A[i + 1][j] === 2 && A[i + 2][j] === 2 && A[i + 3][j] === 1) {//vertical 1-2-2-1
+                    if (
+                        A[i][j] === 1 &&
+                        A[i + 1][j] === 2 &&
+                        A[i + 2][j] === 2 &&
+                        A[i + 3][j] === 1
+                    ) {
+                        //vertical 1-2-2-1
                         if (A[i + 1][j - 1] === -1) {
                             changed = true;
                             bot_put_mine(x, y, i + 1, j - 1);
@@ -190,7 +221,13 @@ function bot(x, y, arr) {
                     }
                 }
                 if (i >= 1 && i < x - 1 && j < y - 3) {
-                    if (A[i][j] === 1 && A[i][j + 1] === 2 && A[i][j + 2] === 2 && A[i][j + 3] === 1) {//horizontal 1-2-2-1
+                    if (
+                        A[i][j] === 1 &&
+                        A[i][j + 1] === 2 &&
+                        A[i][j + 2] === 2 &&
+                        A[i][j + 3] === 1
+                    ) {
+                        //horizontal 1-2-2-1
                         if (A[i - 1][j + 1] === -1) {
                             changed = true;
                             bot_put_mine(x, y, i - 1, j + 1);
@@ -234,7 +271,7 @@ function bot(x, y, arr) {
                 }
             }
         }
-    } while (changed)
+    } while (changed);
 
     for (let i = 0; i < x; i++) {
         for (let j = 0; j < y; j++) {
