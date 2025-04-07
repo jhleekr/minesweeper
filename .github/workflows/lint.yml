@@ -1,10 +1,8 @@
 name: Lint
 
 on:
-  push:
-    branches: [ main, live ]
-  pull_request:
-    branches: [ main, live ]
+  push: null
+  pull_request: null
 
 permissions:
   contents: read
@@ -13,10 +11,9 @@ jobs:
   lint:
     fix-lint-issues:
       permissions:
-        # To write linting fixes
         contents: write
-        # To write Super-linter status checks
         statuses: write
+
       runs-on: ubuntu-latest
       
       steps:
