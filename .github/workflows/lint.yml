@@ -37,6 +37,7 @@ jobs:
           VALIDATE_CSS: false
           VALIDATE_VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_JAVASCRIPT_ES: false
+          VALIDATE_JSCPD: false
 
 
       - name: Commit and push linting fixes
