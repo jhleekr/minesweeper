@@ -36,10 +36,13 @@ function generate() {
     if (em) {
         e = 1;
     }
-    setUrlParams({
-        'x': x,
-        'y': y,
-        'd': d,
-        'e': e
-    }, "game.html");
+    setUrlParams(
+        {
+            x: x,
+            y: y,
+            d: d,
+            e: e,
+        },
+        'game.html'
+    );
 }

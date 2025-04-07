@@ -7,18 +7,24 @@
  * minesweeper data processing core
  */
 
-function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
+function setMine(x, y, clickX, clickY, difficulty, need_bot) {
+    //difficulty: 0-easy, 1-intermediate, 2-hard, 3-hell
     let nMine = 0;
     if (difficulty == 0) {
-        nMine = Math.max(parseInt(x * y / 8), 4);
-    }
-    else if (difficulty == 1) {
-        nMine = Math.max(parseInt(x * y / 6), 4);
-    }
-    else if (difficulty == 2) {
-        nMine = Math.max(parseInt(Math.max(parseInt((Math.pow(x * y, 1.1)) / 8), parseInt(x * y / 5))), 4);
-    }
-    else {
+        nMine = Math.max(parseInt((x * y) / 8), 4);
+    } else if (difficulty == 1) {
+        nMine = Math.max(parseInt((x * y) / 6), 4);
+    } else if (difficulty == 2) {
+        nMine = Math.max(
+            parseInt(
+                Math.max(
+                    parseInt(Math.pow(x * y, 1.1) / 8),
+                    parseInt((x * y) / 5)
+                )
+            ),
+            4
+        );
+    } else {
         nMine = Math.max(parseInt(x * y) / 4, 4);
     }
     let n = Math.max(parseInt(nMine / 5), 1);
@@ -67,7 +73,7 @@ function setMine(x, y, clickX, clickY, difficulty, need_bot) {    //difficulty: 
 }
 
 function open(x, y, posX, posY, arr) {
-    let cnt = 0
+    let cnt = 0;
 
     arr[posX][posY] = -1.5; //to prevent infinite loop
 
@@ -76,7 +82,7 @@ function open(x, y, posX, posY, arr) {
         let b = posY + dy[i];
         if (OK(x, y, a, b)) {
             if (arr[a][b] === -1) {
-                cnt += 1
+                cnt += 1;
             }
         }
     }
@@ -108,7 +114,7 @@ function processMine(x, y, clickX, clickY, arr, flagarr, clicked) {
             for (let i = 0; i < 8; i++) {
                 let a = clickX + dx[i];
                 let b = clickY + dy[i];
-                if (OK(x, y, a, b) && flagarr[a][b] && ((arr[a][b] < 0))) {
+                if (OK(x, y, a, b) && flagarr[a][b] && arr[a][b] < 0) {
                     cnt += 1;
                 }
             }
