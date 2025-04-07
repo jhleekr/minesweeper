@@ -13,15 +13,11 @@ jobs:
       permissions:
         contents: write
         statuses: write
-
       runs-on: ubuntu-latest
-      
       steps:
-        - name: Checkout code
-          uses: actions/checkout@v4
+        - uses: actions/checkout@v4
           with:
             fetch-depth: 0
-
         - name: Super-linter
           uses: super-linter/super-linter/slim@v7.3.0
           env:
@@ -39,8 +35,6 @@ jobs:
             VALIDATE_JAVASCRIPT_ES: false
             VALIDATE_JSCPD: false
             FIX_MARKDOWN: false
-
-
         - name: Commit and push linting fixes
           if: >
             github.event_name == 'pull_request' &&
