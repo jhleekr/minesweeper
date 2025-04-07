@@ -9,7 +9,6 @@ permissions:
 
 jobs:
   lint:
-  fix-lint-issues:
     permissions:
       contents: write
       statuses: write
