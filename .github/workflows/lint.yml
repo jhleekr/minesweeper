@@ -9,10 +9,7 @@ permissions:
 
 jobs:
   lint:
-    permissions:
-      contents: write
-      statuses: write
-      workflows: write
+    permissions: write-all
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
